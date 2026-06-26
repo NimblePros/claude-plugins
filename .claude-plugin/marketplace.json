@@ -1,0 +1,23 @@
+{
+  "$schema": "https://code.claude.com/schemas/marketplace.json",
+  "name": "nimblepros",
+  "description": "NimblePros Claude Code plugins for .NET development workflows.",
+  "owner": {
+    "name": "NimblePros"
+  },
+  "plugins": [
+    {
+      "name": "add-coverage",
+      "source": ".",
+      "description": "Automated test coverage workflow for .NET projects. Finds the highest-CRAP untested method, writes a mutation-validated xUnit test, reviews it, commits, and opens a PR — all in one command.",
+      "author": {
+        "name": "NimblePros"
+      },
+      "homepage": "https://github.com/NimblePros/add-coverage",
+      "repository": "https://github.com/NimblePros/add-coverage",
+      "license": "MIT",
+      "keywords": ["dotnet", "testing", "coverage", "xunit", "mutation-testing"],
+      "category": "testing"
+    }
+  ]
+}

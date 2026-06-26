@@ -6,7 +6,7 @@ Automated test coverage workflow for .NET projects. One command finds the highes
 
 ## What it does
 
-Running `/add-coverage` triggers a six-phase pipeline:
+Running `/add-coverage:add-coverage` (or `/add-coverage` when using the standalone install) triggers a six-phase pipeline:
 
 | Phase | Agent | Output |
 |---|---|---|
@@ -55,6 +55,7 @@ The pipeline stops and reports to you if the build is broken, the test fails to 
 ```
 
 **Required NuGet packages** in test projects:
+
 - `xunit`
 - `Shouldly`
 - `NSubstitute`
@@ -68,50 +69,61 @@ The pipeline stops and reports to you if the build is broken, the test fails to 
 
 ### Option A — Claude Code plugin install (recommended)
 
+Add the NimblePros marketplace, then install the plugin:
+
 ```bash
-claude plugin install github:NimblePros/add-coverage
+claude plugin marketplace add NimblePros/add-coverage
+claude plugin install add-coverage@nimblepros
 ```
 
 This installs the command, agents, and skills into your global Claude Code configuration so they are available in every project.
 
-### Option B — Per-project install
+### Option B — Per-project install via `.claude/settings.json`
 
-Copy the `.claude/` directory from this repo into your project root:
+Add the marketplace and plugin to your project's `.claude/settings.json` so all collaborators get it when they trust the folder:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "nimblepros": {
+      "source": {
+        "source": "github",
+        "repo": "NimblePros/add-coverage"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "add-coverage@nimblepros": true
+  }
+}
+```
+
+### Option C — Manual copy (standalone, no marketplace)
+
+Copy the plugin files from this repo into your project's `.claude/` directory to use them as standalone configuration (skills are available without namespacing, e.g. `/add-coverage` instead of `/add-coverage:add-coverage`):
 
 ```bash
 # From your project root
 gh repo clone NimblePros/add-coverage /tmp/add-coverage-plugin
-cp -r /tmp/add-coverage-plugin/.claude .
+mkdir -p .claude
+cp -r /tmp/add-coverage-plugin/commands .claude/
+cp -r /tmp/add-coverage-plugin/agents .claude/
+cp -r /tmp/add-coverage-plugin/skills .claude/
 ```
 
 Commit the `.claude/` directory to your repo so the whole team gets it.
 
-### Option C — Manual copy
-
-Download and copy individual files from this repo into your project's `.claude/` directory, mirroring the directory structure:
-
-```
-your-project/
-└── .claude/
-    ├── commands/
-    │   └── add-coverage.md
-    ├── agents/
-    │   ├── coverage-gap-finder.md
-    │   ├── test-author.md
-    │   ├── mutation-validator.md
-    │   └── test-reviewer.md
-    └── skills/
-        ├── crap-analysis/
-        │   └── SKILL.md
-        ├── test-authoring/
-        │   └── SKILL.md
-        └── stryker-dotnet/
-            └── SKILL.md
-```
-
 ---
 
 ## Usage
+
+When installed as a plugin, skills are namespaced by the plugin name:
+
+```bash
+/add-coverage:add-coverage [optional: namespace or class name]
+```
+
+When installed via Option C (standalone copy into `.claude/`), use the short form:
 
 ```bash
 /add-coverage [optional: namespace or class name]
@@ -120,19 +132,19 @@ your-project/
 **Target the whole solution:**
 
 ```bash
-/add-coverage
+/add-coverage:add-coverage
 ```
 
 **Target a specific namespace:**
 
 ```bash
-/add-coverage NimblePros.App.Api
+/add-coverage:add-coverage NimblePros.App.Api
 ```
 
 **Target a specific class:**
 
 ```bash
-/add-coverage CatalogService
+/add-coverage:add-coverage CatalogService
 ```
 
 ---
@@ -143,7 +155,9 @@ your-project/
 
 The `test-authoring` skill contains a table mapping source projects to test projects. **Update this table to match your solution structure** before using the plugin.
 
-Open `.claude/skills/test-authoring/SKILL.md` and find the section `## Where to put new test files`. Replace the example rows with your project's actual mapping:
+After installing, the files live in Claude Code's plugin cache. To customize, fork this repo, edit the skill files, and point your marketplace at your fork.
+
+For **standalone installs (Option C)**, open `.claude/skills/test-authoring/SKILL.md` in your project and find the section `## Where to put new test files`. Replace the example rows with your project's actual mapping:
 
 ```markdown
 | Source project | Test project |
@@ -154,11 +168,11 @@ Open `.claude/skills/test-authoring/SKILL.md` and find the section `## Where to 
 
 ### CRAP score thresholds
 
-The `coverage-gap-finder` agent targets methods with CRAP > 30 or 0% coverage with cyclomatic complexity ≥ 5. These thresholds are defined in `.claude/agents/coverage-gap-finder.md` and can be adjusted for your project's risk tolerance.
+The `coverage-gap-finder` agent targets methods with CRAP > 30 or 0% coverage with cyclomatic complexity ≥ 5. These thresholds are defined in `agents/coverage-gap-finder.md` and can be adjusted by forking this repo.
 
 ### Test framework conventions
 
-The `test-authoring` skill enforces xUnit + Shouldly + NSubstitute. If your project uses different libraries (e.g., NUnit, FluentAssertions, Moq), update `.claude/skills/test-authoring/SKILL.md` to reflect your actual stack.
+The `test-authoring` skill enforces xUnit + Shouldly + NSubstitute. If your project uses different libraries (e.g., NUnit, FluentAssertions, Moq), fork this repo and update `skills/test-authoring/SKILL.md` to reflect your actual stack.
 
 ---
 
@@ -198,21 +212,22 @@ The `mutation-validator` falls back to a single manual mutation. To use Stryker,
 
 ```
 .
-├── claude-plugin.json                        # Plugin manifest
+├── .claude-plugin/
+│   ├── plugin.json                           # Plugin manifest
+│   └── marketplace.json                      # Marketplace catalog (enables plugin install)
 ├── README.md                                 # This file
-└── .claude/
-    ├── commands/
-    │   └── add-coverage.md                   # /add-coverage slash command
-    ├── agents/
-    │   ├── coverage-gap-finder.md            # Phase 1: find the gap
-    │   ├── test-author.md                    # Phase 2: write the test
-    │   ├── mutation-validator.md             # Phase 3: validate it has teeth
-    │   └── test-reviewer.md                  # Phase 4: review quality
-    └── skills/
-        ├── crap-analysis/
-        │   └── SKILL.md                      # CRAP scoring, runsettings, ReportGenerator
-        ├── test-authoring/
-        │   └── SKILL.md                      # xUnit conventions for this project
-        └── stryker-dotnet/
-            └── SKILL.md                      # Stryker.NET invocation and result parsing
+├── commands/
+│   └── add-coverage.md                       # /add-coverage:add-coverage slash command
+├── agents/
+│   ├── coverage-gap-finder.md                # Phase 1: find the gap
+│   ├── test-author.md                        # Phase 2: write the test
+│   ├── mutation-validator.md                 # Phase 3: validate it has teeth
+│   └── test-reviewer.md                      # Phase 4: review quality
+└── skills/
+    ├── crap-analysis/
+    │   └── SKILL.md                          # CRAP scoring, runsettings, ReportGenerator
+    ├── test-authoring/
+    │   └── SKILL.md                          # xUnit conventions for this project
+    └── stryker-dotnet/
+        └── SKILL.md                          # Stryker.NET invocation and result parsing
 ```
