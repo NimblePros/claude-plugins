@@ -69,7 +69,7 @@ The pipeline stops and reports to you if the build is broken, the test fails to 
 ### Option A — Claude Code plugin install (recommended)
 
 ```bash
-claude plugin install github:HyperPath-Solutions/claude-add-coverage
+claude plugin install github:NimblePros/add-coverage
 ```
 
 This installs the command, agents, and skills into your global Claude Code configuration so they are available in every project.
@@ -80,7 +80,7 @@ Copy the `.claude/` directory from this repo into your project root:
 
 ```bash
 # From your project root
-gh repo clone HyperPath-Solutions/claude-add-coverage /tmp/add-coverage-plugin
+gh repo clone NimblePros/add-coverage /tmp/add-coverage-plugin
 cp -r /tmp/add-coverage-plugin/.claude .
 ```
 
@@ -113,23 +113,26 @@ your-project/
 
 ## Usage
 
-```
+```bash
 /add-coverage [optional: namespace or class name]
 ```
 
 **Target the whole solution:**
-```
+
+```bash
 /add-coverage
 ```
 
 **Target a specific namespace:**
-```
-/add-coverage HyperPath.Viewer.Api
+
+```bash
+/add-coverage NimblePros.App.Api
 ```
 
 **Target a specific class:**
-```
-/add-coverage AnnotationService
+
+```bash
+/add-coverage CatalogService
 ```
 
 ---
