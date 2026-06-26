@@ -1,0 +1,215 @@
+# add-coverage Claude Code Plugin
+
+Automated test coverage workflow for .NET projects. One command finds the highest-risk untested method, writes a mutation-validated xUnit test, reviews it for quality, commits, and opens a PR.
+
+---
+
+## What it does
+
+Running `/add-coverage` triggers a six-phase pipeline:
+
+| Phase | Agent | Output |
+|---|---|---|
+| 1. Find the gap | `coverage-gap-finder` | `gap-report.md` — highest-CRAP untested method |
+| 2. Write the test | `test-author` | New xUnit test file, passing green |
+| 3. Validate it has teeth | `mutation-validator` | `mutation-result.md` — PASS/FAIL via Stryker or manual mutation |
+| 4. Review quality | `test-reviewer` | `review-notes.md` — LGTM or numbered refactor requests |
+| 5. Commit | _(orchestrator)_ | Branch `test/add-coverage-{ClassName}` pushed |
+| 6. Open PR | _(orchestrator)_ | PR with structured description |
+
+The pipeline stops and reports to you if the build is broken, the test fails to validate, or the reviewer flags unresolved issues after one refactor pass.
+
+---
+
+## Requirements
+
+**CLI tools** (must be on PATH):
+- `dotnet` (.NET 8 or 9)
+- `git`
+- `gh` (GitHub CLI, authenticated)
+
+**Required .NET local tools** (add to `.config/dotnet-tools.json`):
+
+```json
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "dotnet-reportgenerator-globaltool": {
+      "version": "5.4.5",
+      "commands": ["reportgenerator"]
+    }
+  }
+}
+```
+
+**Optional .NET local tools** (enables Stryker mutation testing; falls back to manual mutation if absent):
+
+```json
+{
+  "dotnet-stryker": {
+    "version": "4.6.0",
+    "commands": ["dotnet-stryker"]
+  }
+}
+```
+
+**Required NuGet packages** in test projects:
+- `xunit`
+- `Shouldly`
+- `NSubstitute`
+- `coverlet.collector`
+
+**Required repo file** — `coverage.runsettings` at the repo root. See the `crap-analysis` skill for the recommended content.
+
+---
+
+## Installation
+
+### Option A — Claude Code plugin install (recommended)
+
+```bash
+claude plugin install github:HyperPath-Solutions/claude-add-coverage
+```
+
+This installs the command, agents, and skills into your global Claude Code configuration so they are available in every project.
+
+### Option B — Per-project install
+
+Copy the `.claude/` directory from this repo into your project root:
+
+```bash
+# From your project root
+gh repo clone HyperPath-Solutions/claude-add-coverage /tmp/add-coverage-plugin
+cp -r /tmp/add-coverage-plugin/.claude .
+```
+
+Commit the `.claude/` directory to your repo so the whole team gets it.
+
+### Option C — Manual copy
+
+Download and copy individual files from this repo into your project's `.claude/` directory, mirroring the directory structure:
+
+```
+your-project/
+└── .claude/
+    ├── commands/
+    │   └── add-coverage.md
+    ├── agents/
+    │   ├── coverage-gap-finder.md
+    │   ├── test-author.md
+    │   ├── mutation-validator.md
+    │   └── test-reviewer.md
+    └── skills/
+        ├── crap-analysis/
+        │   └── SKILL.md
+        ├── test-authoring/
+        │   └── SKILL.md
+        └── stryker-dotnet/
+            └── SKILL.md
+```
+
+---
+
+## Usage
+
+```
+/add-coverage [optional: namespace or class name]
+```
+
+**Target the whole solution:**
+```
+/add-coverage
+```
+
+**Target a specific namespace:**
+```
+/add-coverage HyperPath.Viewer.Api
+```
+
+**Target a specific class:**
+```
+/add-coverage AnnotationService
+```
+
+---
+
+## Project-specific customization
+
+### Test project mapping
+
+The `test-authoring` skill contains a table mapping source projects to test projects. **Update this table to match your solution structure** before using the plugin.
+
+Open `.claude/skills/test-authoring/SKILL.md` and find the section `## Where to put new test files`. Replace the example rows with your project's actual mapping:
+
+```markdown
+| Source project | Test project |
+|---|---|
+| `src/YourApp.Core/` | `tests/YourApp.Core.Tests/` |
+| `src/YourApp.Api/`  | `tests/YourApp.Api.Tests/`  |
+```
+
+### CRAP score thresholds
+
+The `coverage-gap-finder` agent targets methods with CRAP > 30 or 0% coverage with cyclomatic complexity ≥ 5. These thresholds are defined in `.claude/agents/coverage-gap-finder.md` and can be adjusted for your project's risk tolerance.
+
+### Test framework conventions
+
+The `test-authoring` skill enforces xUnit + Shouldly + NSubstitute. If your project uses different libraries (e.g., NUnit, FluentAssertions, Moq), update `.claude/skills/test-authoring/SKILL.md` to reflect your actual stack.
+
+---
+
+## How the handoff works
+
+Agents communicate through files written to `.claude/add-coverage-work/` during a run. This directory is created at the start and deleted after the PR is opened. The files are:
+
+| File | Written by | Read by |
+|---|---|---|
+| `gap-report.md` | `coverage-gap-finder` | `test-author`, `mutation-validator` |
+| `new-test-path.txt` | `test-author` | `mutation-validator`, `test-reviewer` |
+| `mutation-result.md` | `mutation-validator` | orchestrator (PR body) |
+| `review-notes.md` | `test-reviewer` | `test-author` (refactor pass) |
+
+---
+
+## Troubleshooting
+
+**"No meaningful gap was found"**
+All methods have CRAP < 30 and coverage > 80%. Pass a specific namespace to narrow the search, or the codebase genuinely has good coverage — that's a win.
+
+**Mutation validator FAIL**
+The test doesn't assert the right observable outcome. The validator reports which mutation survived and what assertion would catch it. Fix the test manually or ask Claude to retry.
+
+**Build broken at Phase 1**
+The `coverage-gap-finder` stops immediately if `dotnet build` fails. Fix the build first.
+
+**`gh` not authenticated**
+Run `gh auth login` before using `/add-coverage`.
+
+**Stryker not found**
+The `mutation-validator` falls back to a single manual mutation. To use Stryker, add `dotnet-stryker` to `.config/dotnet-tools.json` and run `dotnet tool restore`.
+
+---
+
+## Contents
+
+```
+.
+├── claude-plugin.json                        # Plugin manifest
+├── README.md                                 # This file
+└── .claude/
+    ├── commands/
+    │   └── add-coverage.md                   # /add-coverage slash command
+    ├── agents/
+    │   ├── coverage-gap-finder.md            # Phase 1: find the gap
+    │   ├── test-author.md                    # Phase 2: write the test
+    │   ├── mutation-validator.md             # Phase 3: validate it has teeth
+    │   └── test-reviewer.md                  # Phase 4: review quality
+    └── skills/
+        ├── crap-analysis/
+        │   └── SKILL.md                      # CRAP scoring, runsettings, ReportGenerator
+        ├── test-authoring/
+        │   └── SKILL.md                      # xUnit conventions for this project
+        └── stryker-dotnet/
+            └── SKILL.md                      # Stryker.NET invocation and result parsing
+```
