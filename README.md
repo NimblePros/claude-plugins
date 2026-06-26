@@ -24,7 +24,8 @@ The pipeline stops and reports to you if the build is broken, the test fails to 
 ## Requirements
 
 **CLI tools** (must be on PATH):
-- `dotnet` (.NET 8 or 9)
+
+- `dotnet` (.NET 8+)
 - `git`
 - `gh` (GitHub CLI, authenticated)
 
