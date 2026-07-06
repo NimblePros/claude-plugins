@@ -7,7 +7,7 @@ allowed-tools: Bash(dotnet *), Bash(git *), Bash(gh *), Write, Edit, Read
 <objective>
 Run the full add-coverage pipeline: identify the highest-priority untested method, write a test for it, prove the test catches breaking changes, review the test for quality, commit the result, and open a pull request.
 
-Optional: pass a namespace or class name as `$ARGUMENTS` to narrow the gap search (e.g., `HyperPath.Viewer.Api` or `AnnotationService`).
+Optional: pass a namespace or class name as `$ARGUMENTS` to narrow the gap search (e.g., `Acme.Store.Api` or `PaymentService`).
 </objective>
 
 <context>
@@ -31,6 +31,7 @@ New-Item -ItemType Directory -Force .claude/add-coverage-work | Out-Null
 Invoke the `coverage-gap-finder` agent with `$ARGUMENTS` as input.
 
 The agent will:
+
 - Run `dotnet build` (stops here if the build is broken)
 - Run `dotnet test` with coverage collection
 - Generate a coverage report
@@ -46,6 +47,7 @@ The agent will:
 Invoke the `test-author` agent (no additional input beyond the handoff files).
 
 The agent will:
+
 - Read `gap-report.md` to understand what to test
 - Write a test file in the correct test project
 - Run the test to confirm it passes green
@@ -58,6 +60,7 @@ The agent will:
 Invoke the `mutation-validator` agent.
 
 The agent will:
+
 - Read `new-test-path.txt` and `gap-report.md`
 - Apply a minimal breaking mutation to the source method
 - Confirm the test fails with the mutation
@@ -67,6 +70,7 @@ The agent will:
 **Read mutation-result.md.** Check the first line for `Result: PASS` or `Result: FAIL`.
 
 **If FAIL**: The test does not catch breaking changes. Report to the user:
+
 - Which mutation was not caught
 - What the mutation-validator suggests fixing
 - Stop and ask the user whether to retry or abandon
@@ -78,6 +82,7 @@ The agent will:
 Invoke the `test-reviewer` agent.
 
 The agent will:
+
 - Read the test file at the path in `new-test-path.txt`
 - Review for naming, structure, assertions, and meaningfulness
 - Write `.claude/add-coverage-work/review-notes.md`
@@ -150,6 +155,7 @@ Remove-Item -Recurse -Force .claude/add-coverage-work -ErrorAction SilentlyConti
 ## Report to user
 
 Output:
+
 - The PR URL
 - The test class and method name
 - The CRAP score that was addressed

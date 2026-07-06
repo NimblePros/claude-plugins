@@ -13,7 +13,7 @@ Load and apply the `crap-analysis` skill. It defines how to run coverage collect
 
 ## Input
 
-The agent input (`$ARGUMENTS`) may contain an optional namespace or class name filter (e.g., `HyperPath.Viewer.Api` or `AnnotationService`). If provided, restrict the gap report to methods in matching types. If empty, report the single highest-CRAP method across the whole solution.
+The agent input (`$ARGUMENTS`) may contain an optional namespace or class name filter (e.g., `Acme.Store.Api` or `PaymentService`). If provided, restrict the gap report to methods in matching types. If empty, report the single highest-CRAP method across the whole solution.
 
 ## Steps
 

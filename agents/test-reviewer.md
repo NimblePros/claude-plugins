@@ -22,29 +22,35 @@ Do not read any other handoff files.
 For each item, check yes/no and note specific line numbers when there is a problem.
 
 ### Naming (test-authoring skill § Naming)
+
 - [ ] Test class follows `<Subject>_<Scenario>` pattern
 - [ ] Test method(s) follow `<ExpectedOutcome>_<Condition>` pattern
 - [ ] Names are self-documenting — a reader understands the intent without reading the body
 
 ### Structure (test-authoring skill § Structure)
+
 - [ ] AAA is inline — no constructor setup or shared state for unit tests
 - [ ] Each test method proves exactly one behaviour
 - [ ] One file, one class
 
 ### Assertions (test-authoring skill § Assertions)
+
 - [ ] Shouldly is used, not `Assert.*`
 - [ ] Assertions target an observable outcome (return value, state, received call)
 - [ ] No assertion on framework behaviour or implementation details
 
 ### Mocking (test-authoring skill § Mocking)
+
 - [ ] NSubstitute used if mocking is needed
 - [ ] Verification calls use `.Received()`, not manual state tracking
 
 ### Fixture data (test-authoring skill § Fixtures)
+
 - [ ] Complex objects use a `file static class` fixture with `Make()` factory
 - [ ] Factory defaults are sensible; tests only specify fields they care about
 
 ### Meaningfulness (test-authoring skill § The most important rule)
+
 - [ ] The assertion would fail if the key logic in the method under test were deleted
 - [ ] No tautological assertions (e.g., asserting a value equals the value you just set)
 - [ ] Edge cases visible from reading the source method — are they covered or is a note warranted?

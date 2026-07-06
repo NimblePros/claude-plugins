@@ -1,12 +1,12 @@
 {
-  "name": "add-coverage",
-  "description": "Automated test coverage workflow for .NET projects. Finds the highest-CRAP untested method, writes a mutation-validated xUnit test, reviews it, commits, and opens a PR — all in one command.",
+  "name": "nimblepros",
+  "description": "Developer command toolkit for Claude",
   "version": "1.0.0",
   "author": {
     "name": "NimblePros"
   },
-  "homepage": "https://github.com/NimblePros/add-coverage",
-  "repository": "https://github.com/NimblePros/add-coverage",
+  "homepage": "https://github.com/NimblePros/claude-plugin",
+  "repository": "https://github.com/NimblePros/claude-plugin",
   "license": "MIT",
   "keywords": ["dotnet", "testing", "coverage", "xunit", "mutation-testing"]
 }

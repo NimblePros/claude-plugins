@@ -1,6 +1,6 @@
 ---
 name: test-authoring
-description: Conventions for writing xUnit tests in the HyperPath Viewer repo. Covers naming, assertion style (Shouldly), mocking (NSubstitute), fixture patterns, and the rules that make tests meaningful vs. ornamental. Load this skill before writing or reviewing any test file.
+description: Conventions for writing xUnit tests. Covers naming, assertion style (Shouldly), mocking (NSubstitute), fixture patterns, and the rules that make tests meaningful vs. ornamental. Load this skill before writing or reviewing any test file.
 invocable: true
 ---
 
@@ -209,8 +209,8 @@ Bad targets:
 
 | Source project | Test project |
 |---|---|
-| `src/HyperPath.Viewer.Api/` | `tests/HyperPath.Viewer.Api.Tests/` |
-| `src/HyperPath.Viewer.Annotations.Blazor/` | `tests/HyperPath.Viewer.Annotations.Blazor.Tests/` |
-| `src/HyperPath.Viewer.BlazorClient/` | `tests/HyperPath.Viewer.BlazorClient.Tests/` |
+| `src/Acme.Store.Api/` | `tests/Acme.Store.Api.Tests/` |
+| `src/Acme.Store.Blazor.Shared/` | `tests/Acme.Store.Blazor.Shared.Tests/` |
+| `src/Acme.Store.BlazorClient/` | `tests/Acme.Store.BlazorClient.Tests/` |
 
-Mirror the source folder structure inside the test project. If `src/HyperPath.Viewer.Api/Endpoints/Annotations/` holds the source, the test file goes in `tests/HyperPath.Viewer.Api.Tests/Endpoints/Annotations/`.
+Mirror the source folder structure inside the test project. If `src/Acme.Store.Api/Endpoints/Validations/` holds the source, the test file goes in `tests/Acme.Store.Api.Tests/Endpoints/Validations/`.

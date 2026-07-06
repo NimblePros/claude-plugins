@@ -50,8 +50,9 @@ The test **must pass green**. If it fails, diagnose and fix before proceeding. D
 Write the relative path of the test file to `.claude/add-coverage-work/new-test-path.txt`.
 
 Example content:
-```
-tests/HyperPath.Viewer.Api.Tests/Endpoints/Annotations/CreateAnnotationEndpointTests.cs
+
+```test
+tests/Acme.PaymentService.Tests/CreatePaymentServiceTests.cs
 ```
 
 ## Done

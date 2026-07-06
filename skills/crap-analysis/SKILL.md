@@ -20,7 +20,11 @@ Use this skill when:
 
 ## What is CRAP?
 
-**CRAP Score = Complexity x (1 - Coverage)^2**
+**CRAP Score = comp(m)^2 * (1 – cov(m)/100)^3 + comp(m)**
+
+Where:
+- `comp(m)` = cyclomatic complexity of the method
+- `cov(m)` = code coverage percentage
 
 The CRAP (Change Risk Anti-Patterns) score combines cyclomatic complexity with test coverage to identify risky code.
 
@@ -38,13 +42,16 @@ The CRAP (Change Risk Anti-Patterns) score combines cyclomatic complexity with t
 
 ### CRAP Score Examples
 
-| Method           | Complexity | Coverage | Calculation       | CRAP     |
-| ---------------- | ---------- | -------- | ----------------- | -------- |
-| `GetUserId()`    | 1          | 0%       | 1 x (1 - 0)^2     | **1**    |
-| `ParseToken()`   | 54         | 52%      | 54 x (1 - 0.52)^2 | **12.4** |
-| `ValidateForm()` | 20         | 0%       | 20 x (1 - 0)^2    | **20**   |
-| `ProcessOrder()` | 45         | 20%      | 45 x (1 - 0.20)^2 | **28.8** |
-| `ImportData()`   | 80         | 10%      | 80 x (1 - 0.10)^2 | **64.8** |
+| Method           | Complexity | Coverage | Calculation                              | CRAP       |
+| ---------------- | ---------- | -------- | ---------------------------------------- | ---------- |
+| `GetUserId()`    | 1          | 0%       | 1^2 * (1 - 0/100)^3 + 1                  | **2**      |
+| `ParseToken()`   | 54         | 52%      | 54^2 * (1 - 52/100)^3 + 54               | **376.5**  |
+| `ValidateForm()` | 20         | 0%       | 20^2 * (1 - 0/100)^3 + 20                | **420**    |
+| `ProcessOrder()` | 45         | 20%      | 45^2 * (1 - 20/100)^3 + 45               | **1081.8** |
+| `ImportData()`   | 80         | 10%      | 80^2 * (1 - 10/100)^3 + 80               | **4745.6** |
+| `ImportData()`   | 80         | 100%     | 80^2 * (1 - 100/100)^3 + 80               | **80**    |
+
+It's worth remembering that Cyclomatic Complexity threshold levels usually recommend refactoring with a value above 10, so even with a lot of code coverage the more complex methods would still be considered high risk (see the last entry).
 
 ---
 

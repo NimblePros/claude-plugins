@@ -1,12 +1,16 @@
-# add-coverage Claude Code Plugin
+# NimblePros Claude Code Plugin
 
-Automated test coverage workflow for .NET projects. One command finds the highest-risk untested method, writes a mutation-validated xUnit test, reviews it for quality, commits, and opens a PR.
+This plugin currently contains a command for adding coverage to complex methods within dotnet projects. Other skills, commands, and agents may be added in the future.
 
 ---
 
+## Command add-coverage
+
+A single command that finds the highest-risk untested method, writes a mutation-validated xUnit test, reviews it for quality, commits, and opens a PR.
+
 ## What it does
 
-Running `/add-coverage:add-coverage` (or `/add-coverage` when using the standalone install) triggers a six-phase pipeline:
+Running `/nimblepros:add-coverage` (or `/add-coverage` when using the standalone install) triggers a six-phase pipeline:
 
 | Phase | Agent | Output |
 |---|---|---|
@@ -73,8 +77,8 @@ The pipeline stops and reports to you if the build is broken, the test fails to 
 Add the NimblePros marketplace, then install the plugin:
 
 ```bash
-claude plugin marketplace add NimblePros/add-coverage
-claude plugin install add-coverage@nimblepros
+claude plugin marketplace add NimblePros/claude-plugin
+claude plugin install claude-plugin@nimblepros
 ```
 
 This installs the command, agents, and skills into your global Claude Code configuration so they are available in every project.
@@ -89,7 +93,7 @@ Add the marketplace and plugin to your project's `.claude/settings.json` so all 
     "nimblepros": {
       "source": {
         "source": "github",
-        "repo": "NimblePros/add-coverage"
+        "repo": "NimblePros/claude-plugin"
       }
     }
   },
@@ -101,15 +105,15 @@ Add the marketplace and plugin to your project's `.claude/settings.json` so all 
 
 ### Option C — Manual copy (standalone, no marketplace)
 
-Copy the plugin files from this repo into your project's `.claude/` directory to use them as standalone configuration (skills are available without namespacing, e.g. `/add-coverage` instead of `/add-coverage:add-coverage`):
+Copy the plugin files from this repo into your project's `.claude/` directory to use them as standalone configuration (skills are available without namespacing, e.g. `/add-coverage` instead of `/nimblepros:add-coverage`):
 
 ```bash
 # From your project root
-gh repo clone NimblePros/add-coverage /tmp/add-coverage-plugin
+gh repo clone NimblePros/claude-plugin /tmp/nimblepros-plugin
 mkdir -p .claude
-cp -r /tmp/add-coverage-plugin/commands .claude/
-cp -r /tmp/add-coverage-plugin/agents .claude/
-cp -r /tmp/add-coverage-plugin/skills .claude/
+cp -r /tmp/nimblepros-plugin/commands .claude/
+cp -r /tmp/nimblepros-plugin/agents .claude/
+cp -r /tmp/nimblepros-plugin/skills .claude/
 ```
 
 Commit the `.claude/` directory to your repo so the whole team gets it.
@@ -121,7 +125,7 @@ Commit the `.claude/` directory to your repo so the whole team gets it.
 When installed as a plugin, skills are namespaced by the plugin name:
 
 ```bash
-/add-coverage:add-coverage [optional: namespace or class name]
+/nimblepros:add-coverage [optional: namespace or class name]
 ```
 
 When installed via Option C (standalone copy into `.claude/`), use the short form:
@@ -133,19 +137,19 @@ When installed via Option C (standalone copy into `.claude/`), use the short for
 **Target the whole solution:**
 
 ```bash
-/add-coverage:add-coverage
+/nimblepros:add-coverage
 ```
 
 **Target a specific namespace:**
 
 ```bash
-/add-coverage:add-coverage NimblePros.App.Api
+/nimblepros:add-coverage NimblePros.App.Api
 ```
 
 **Target a specific class:**
 
 ```bash
-/add-coverage:add-coverage CatalogService
+/nimblepros:add-coverage CatalogService
 ```
 
 ---
