@@ -7,7 +7,7 @@
   },
   "plugins": [
     {
-      "name": "nimblepros",
+      "name": "claude-plugin",
       "source": ".",
       "description": "Developer command toolkit for Claude",
       "author": {

@@ -10,7 +10,7 @@ A single command that finds the highest-risk untested method, writes a mutation-
 
 ## What it does
 
-Running `/nimblepros:add-coverage` (or `/add-coverage` when using the standalone install) triggers a six-phase pipeline:
+Running `/claude-plugin:add-coverage` (or `/add-coverage` when using the standalone install) triggers a six-phase pipeline:
 
 | Phase | Agent | Output |
 |---|---|---|
@@ -98,14 +98,14 @@ Add the marketplace and plugin to your project's `.claude/settings.json` so all 
     }
   },
   "enabledPlugins": {
-    "add-coverage@nimblepros": true
+    "claude-plugin@nimblepros": true
   }
 }
 ```
 
 ### Option C — Manual copy (standalone, no marketplace)
 
-Copy the plugin files from this repo into your project's `.claude/` directory to use them as standalone configuration (skills are available without namespacing, e.g. `/add-coverage` instead of `/nimblepros:add-coverage`):
+Copy the plugin files from this repo into your project's `.claude/` directory to use them as standalone configuration (skills are available without namespacing, e.g. `/add-coverage` instead of `/claude-plugin:add-coverage`):
 
 ```bash
 # From your project root
@@ -125,7 +125,7 @@ Commit the `.claude/` directory to your repo so the whole team gets it.
 When installed as a plugin, skills are namespaced by the plugin name:
 
 ```bash
-/nimblepros:add-coverage [optional: namespace or class name]
+/claude-plugin:add-coverage [optional: namespace or class name]
 ```
 
 When installed via Option C (standalone copy into `.claude/`), use the short form:
@@ -137,19 +137,19 @@ When installed via Option C (standalone copy into `.claude/`), use the short for
 **Target the whole solution:**
 
 ```bash
-/nimblepros:add-coverage
+/claude-plugin:add-coverage
 ```
 
 **Target a specific namespace:**
 
 ```bash
-/nimblepros:add-coverage NimblePros.App.Api
+/claude-plugin:add-coverage NimblePros.App.Api
 ```
 
 **Target a specific class:**
 
 ```bash
-/nimblepros:add-coverage CatalogService
+/claude-plugin:add-coverage CatalogService
 ```
 
 ---
@@ -215,7 +215,7 @@ The `mutation-validator` falls back to a single manual mutation. To use Stryker,
 
 ## Contents
 
-```
+```text
 .
 ├── .claude-plugin/
 │   ├── plugin.json                           # Plugin manifest
