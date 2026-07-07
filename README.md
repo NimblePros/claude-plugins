@@ -10,7 +10,7 @@ A single command that finds the highest-risk untested method, writes a mutation-
 
 ## What it does
 
-Running `/claude-plugin:add-coverage` (or `/add-coverage` when using the standalone install) triggers a six-phase pipeline:
+Running `/nimblepros:add-coverage` (or `/add-coverage` when using the standalone install) triggers a six-phase pipeline:
 
 | Phase | Agent | Output |
 |---|---|---|
@@ -78,7 +78,7 @@ Add the NimblePros marketplace, then install the plugin:
 
 ```bash
 claude plugin marketplace add NimblePros/claude-plugin
-claude plugin install claude-plugin@nimblepros
+claude plugin install nimblepros@nimblepros
 ```
 
 This installs the command, agents, and skills into your global Claude Code configuration so they are available in every project.
@@ -98,14 +98,14 @@ Add the marketplace and plugin to your project's `.claude/settings.json` so all 
     }
   },
   "enabledPlugins": {
-    "claude-plugin@nimblepros": true
+    "nimblepros@nimblepros": true
   }
 }
 ```
 
 ### Option C — Manual copy (standalone, no marketplace)
 
-Copy the plugin files from this repo into your project's `.claude/` directory to use them as standalone configuration (skills are available without namespacing, e.g. `/add-coverage` instead of `/claude-plugin:add-coverage`):
+Copy the plugin files from this repo into your project's `.claude/` directory to use them as standalone configuration (skills are available without namespacing, e.g. `/add-coverage` instead of `/nimblepros:add-coverage`):
 
 ```bash
 # From your project root
@@ -125,7 +125,7 @@ Commit the `.claude/` directory to your repo so the whole team gets it.
 When installed as a plugin, skills are namespaced by the plugin name:
 
 ```bash
-/claude-plugin:add-coverage [optional: namespace or class name]
+/nimblepros:add-coverage [optional: namespace or class name]
 ```
 
 When installed via Option C (standalone copy into `.claude/`), use the short form:
@@ -137,19 +137,19 @@ When installed via Option C (standalone copy into `.claude/`), use the short for
 **Target the whole solution:**
 
 ```bash
-/claude-plugin:add-coverage
+/nimblepros:add-coverage
 ```
 
 **Target a specific namespace:**
 
 ```bash
-/claude-plugin:add-coverage NimblePros.App.Api
+/nimblepros:add-coverage NimblePros.App.Api
 ```
 
 **Target a specific class:**
 
 ```bash
-/claude-plugin:add-coverage CatalogService
+/nimblepros:add-coverage CatalogService
 ```
 
 ---
