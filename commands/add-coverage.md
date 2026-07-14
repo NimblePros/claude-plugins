@@ -1,7 +1,7 @@
 ---
 description: Find a coverage gap, write a test, validate it catches regressions, review it, commit, and open a PR.
 argument-hint: [namespace or class name to target]
-allowed-tools: Bash(dotnet *), Bash(git *), Bash(gh *), Write, Edit, Read
+allowed-tools: Bash(dotnet *), Bash(git *), Bash(gh *), Write, Edit, Read, Glob
 ---
 
 <objective>
@@ -22,6 +22,68 @@ Create the working directory for handoff files:
 
 ```bash
 New-Item -ItemType Directory -Force .claude/add-coverage-work | Out-Null
+```
+
+---
+
+## Phase 0 — Ensure the environment is ready
+
+Before running the pipeline, check that the tools and files it depends on actually exist in **this** repo. This phase never touches source code and never creates or installs anything without asking first — it only diagnoses, proposes, and (if approved) prepares infrastructure.
+
+For each check below: if it already passes, say nothing and move on. If it fails, explain what's missing and why the pipeline needs it, show exactly what you intend to create/change, and ask the user for permission before doing it. If the user declines, stop and explain that the affected phase(s) cannot run without it.
+
+### 0.1 CLI tools
+
+Confirm these are on PATH:
+
+```bash
+dotnet --version
+git --version
+gh auth status
+```
+
+`dotnet` and `git` are hard requirements — if either is missing, stop and tell the user to install it (do not attempt to install a CLI toolchain yourself). If `gh auth status` fails, tell the user to run `gh auth login` — Phase 6 (open the PR) will fail otherwise. You can still continue through Phases 1–5 and just flag this.
+
+### 0.2 dotnet tool manifest (ReportGenerator + Stryker)
+
+Check whether `.config/dotnet-tools.json` exists and lists `dotnet-reportgenerator-globaltool` (required, powers CRAP scoring) and `dotnet-stryker` (optional — enables real mutation testing in Phase 3 instead of the manual single-mutation fallback).
+
+If the manifest or the required entry is missing:
+
+- Show the user the JSON you intend to add (see the `crap-analysis` skill for `dotnet-reportgenerator-globaltool` and the `stryker-dotnet` skill for the optional `dotnet-stryker` entry).
+- Ask permission before writing to `.config/dotnet-tools.json`.
+- If approved, create/update the file (use `dotnet new tool-manifest` first if `.config/dotnet-tools.json` doesn't exist at all), then run:
+
+```bash
+dotnet tool restore
+```
+
+### 0.3 coverage.runsettings
+
+Check whether `coverage.runsettings` exists at the repo root. It's required — OpenCover format is what makes CRAP scoring possible.
+
+If missing:
+
+- Show the user the exact file content you intend to create (see the `crap-analysis` skill's `coverage.runsettings` section).
+- Ask permission before writing it.
+- If approved, write `coverage.runsettings` to the repo root.
+
+### 0.4 Required NuGet packages in test projects
+
+Identify the repo's test projects (glob for `**/*.Tests.csproj` or equivalent). For each, check whether `xunit`, `Shouldly`, `NSubstitute`, and `coverlet.collector` are referenced:
+
+```bash
+dotnet list <TestProject.csproj> package
+```
+
+If any test project is missing one or more of these packages:
+
+- List precisely which packages are missing from which projects.
+- Ask permission before adding them.
+- If approved, for each missing package:
+
+```bash
+dotnet add <TestProject.csproj> package <PackageName>
 ```
 
 ---
@@ -49,9 +111,11 @@ Invoke the `test-author` agent (no additional input beyond the handoff files).
 The agent will:
 
 - Read `gap-report.md` to understand what to test
-- Write a test file in the correct test project
-- Run the test to confirm it passes green
+- Locate the correct test project (existing tests for the class, then project references, then naming convention — per the test-authoring skill)
+- Write the test file there and run it to confirm it passes green
 - Write `.claude/add-coverage-work/new-test-path.txt`
+
+**If the agent reports ambiguous test placement** instead of writing a test (e.g. multiple candidate test projects and no clear winner), present the candidates to the user, ask which to use, then re-invoke `test-author` with the confirmed test project as input.
 
 ---
 

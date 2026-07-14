@@ -205,12 +205,11 @@ Bad targets:
 
 ## Where to put new test files
 
-> **Adapt this table to match your project's solution structure.**
+Determine placement at runtime from the solution itself — there is no mapping file to maintain. Work down this list and stop at the first step that resolves it:
 
-| Source project | Test project |
-|---|---|
-| `src/Acme.Store.Api/` | `tests/Acme.Store.Api.Tests/` |
-| `src/Acme.Store.Blazor.Shared/` | `tests/Acme.Store.Blazor.Shared.Tests/` |
-| `src/Acme.Store.BlazorClient/` | `tests/Acme.Store.BlazorClient.Tests/` |
+1. **Existing tests for the class win.** Grep the solution for an existing test class covering the target (e.g. `<ClassName>Tests` or `<ClassName>_`). If one exists, add the new test alongside it — same project, same folder, same file if the test class matches the scenario.
+2. **Otherwise, follow the project reference.** A test project declares a `<ProjectReference>` to the source project it tests. Grep test project `.csproj` files for a reference to the target's source project. If exactly one test project references it, that's the destination.
+3. **Tiebreak by naming convention.** If several test projects reference the source project (e.g. separate unit and integration test projects), prefer the one whose name mirrors the source project — `src/Acme.Store.Api/` → `tests/Acme.Store.Api.Tests/` — and whose existing contents match the kind of test you're writing.
+4. **If still ambiguous, don't guess.** Report the candidate locations and ask the user to confirm before writing anything. When running as a subagent inside the `/add-coverage` pipeline, output the candidates for the orchestrator to relay instead of writing the test file.
 
-Mirror the source folder structure inside the test project. If `src/Acme.Store.Api/Endpoints/Validations/` holds the source, the test file goes in `tests/Acme.Store.Api.Tests/Endpoints/Validations/`.
+Inside the chosen test project, mirror the source folder structure. If `src/Acme.Store.Api/Endpoints/Validations/` holds the source, the test file goes in `tests/Acme.Store.Api.Tests/Endpoints/Validations/`.

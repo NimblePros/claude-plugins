@@ -13,7 +13,7 @@ Load and apply the `test-authoring` skill. Every finding must reference a specif
 
 ## Input
 
-Read `.claude/add-coverage-work/new-test-path.txt` to find the test file path. Then read that test file. Also read the source file that is being tested (infer it from the test class name and the test-authoring skill's project mapping table).
+Read `.claude/add-coverage-work/new-test-path.txt` to find the test file path. Then read that test file. Also read the source file that is being tested (infer it from the test class name — strip the test suffix and Glob for the source file in the corresponding source project).
 
 Do not read any other handoff files.
 

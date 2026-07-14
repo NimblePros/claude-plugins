@@ -10,10 +10,11 @@ A single command that finds the highest-risk untested method, writes a mutation-
 
 ## What it does
 
-Running `/nimblepros:add-coverage` (or `/add-coverage` when using the standalone install) triggers a six-phase pipeline:
+Running `/nimblepros:add-coverage` (or `/add-coverage` when using the standalone install) triggers a bootstrap check followed by a six-phase pipeline:
 
 | Phase | Agent | Output |
 |---|---|---|
+| 0. Ensure environment | _(orchestrator)_ | Verifies/creates `coverage.runsettings`, `.config/dotnet-tools.json` entries, and required test-project NuGet packages — **only with your approval** |
 | 1. Find the gap | `coverage-gap-finder` | `gap-report.md` — highest-CRAP untested method |
 | 2. Write the test | `test-author` | New xUnit test file, passing green |
 | 3. Validate it has teeth | `mutation-validator` | `mutation-result.md` — PASS/FAIL via Stryker or manual mutation |
@@ -21,19 +22,21 @@ Running `/nimblepros:add-coverage` (or `/add-coverage` when using the standalone
 | 5. Commit | _(orchestrator)_ | Branch `test/add-coverage-{ClassName}` pushed |
 | 6. Open PR | _(orchestrator)_ | PR with structured description |
 
-The pipeline stops and reports to you if the build is broken, the test fails to validate, or the reviewer flags unresolved issues after one refactor pass.
+The pipeline stops and reports to you if the build is broken, the test fails to validate, or the reviewer flags unresolved issues after one refactor pass. Phase 0 never creates or installs anything silently — it always explains what's missing and asks first.
 
 ---
 
 ## Requirements
 
-**CLI tools** (must be on PATH):
+Phase 0 of `/add-coverage` checks all of the following automatically and, where possible, offers to set up what's missing (with your approval before anything is written or installed). This section describes what it's checking for.
+
+**CLI tools** (must be on PATH — Phase 0 verifies but cannot install these for you):
 
 - `dotnet` (.NET 8+)
 - `git`
 - `gh` (GitHub CLI, authenticated)
 
-**Required .NET local tools** (add to `.config/dotnet-tools.json`):
+**Required .NET local tools** (Phase 0 offers to add these to `.config/dotnet-tools.json` if missing):
 
 ```json
 {
@@ -59,14 +62,14 @@ The pipeline stops and reports to you if the build is broken, the test fails to 
 }
 ```
 
-**Required NuGet packages** in test projects:
+**Required NuGet packages** in test projects (Phase 0 checks each test project and offers to `dotnet add package` anything missing):
 
 - `xunit`
 - `Shouldly`
 - `NSubstitute`
 - `coverlet.collector`
 
-**Required repo file** — `coverage.runsettings` at the repo root. See the `crap-analysis` skill for the recommended content.
+**Required repo file** — `coverage.runsettings` at the repo root (Phase 0 offers to create it). See the `crap-analysis` skill for the recommended content.
 
 ---
 
@@ -156,20 +159,15 @@ When installed via Option C (standalone copy into `.claude/`), use the short for
 
 ## Project-specific customization
 
-### Test project mapping
+### Test placement
 
-The `test-authoring` skill contains a table mapping source projects to test projects. **Update this table to match your solution structure** before using the plugin.
+There is nothing to configure. The `test-author` agent determines where each new test belongs at runtime, in order of preference:
 
-After installing, the files live in Claude Code's plugin cache. To customize, fork this repo, edit the skill files, and point your marketplace at your fork.
+1. Alongside existing tests for the target class, if any exist.
+2. In the test project whose `.csproj` has a `<ProjectReference>` to the source project.
+3. By naming convention (`src/YourApp.Api/` → `tests/YourApp.Api.Tests/`) when multiple test projects qualify.
 
-For **standalone installs (Option C)**, open `.claude/skills/test-authoring/SKILL.md` in your project and find the section `## Where to put new test files`. Replace the example rows with your project's actual mapping:
-
-```markdown
-| Source project | Test project |
-|---|---|
-| `src/YourApp.Core/` | `tests/YourApp.Core.Tests/` |
-| `src/YourApp.Api/`  | `tests/YourApp.Api.Tests/`  |
-```
+If placement is still ambiguous after those rules, the pipeline pauses and asks you to pick from the candidates rather than guessing.
 
 ### CRAP score thresholds
 
@@ -191,6 +189,19 @@ Agents communicate through files written to `.claude/add-coverage-work/` during 
 | `new-test-path.txt` | `test-author` | `mutation-validator`, `test-reviewer` |
 | `mutation-result.md` | `mutation-validator` | orchestrator (PR body) |
 | `review-notes.md` | `test-reviewer` | `test-author` (refactor pass) |
+
+---
+
+## Files generated in your repo
+
+Unlike the handoff files above, these are meant to persist and should be committed:
+
+| File | Created by | Purpose |
+|---|---|---|
+| `coverage.runsettings` | Phase 0 (with your approval) | OpenCover-format coverage collection config |
+| `.config/dotnet-tools.json` | Phase 0 (with your approval) | Pins `dotnet-reportgenerator-globaltool` and, optionally, `dotnet-stryker` |
+
+None of these are created without asking first, and Phase 0 never overwrites a version of these files that already exists.
 
 ---
 

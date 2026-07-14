@@ -19,11 +19,17 @@ The agent input (`$ARGUMENTS`) may contain an optional namespace or class name f
 
 ### 1. Ensure infra is ready
 
-Verify `coverage.runsettings` exists in the repo root and `dotnet-reportgenerator-globaltool` is available:
+This agent does not create missing infrastructure or ask the user for permission — that happens in Phase 0 of the orchestrating `/add-coverage` command, before this agent is invoked. Here you only verify and fail fast if something is missing.
+
+Verify `coverage.runsettings` exists in the repo root. If it doesn't, stop and report to the orchestrator that Phase 0 setup did not complete — do not fabricate one yourself.
+
+Verify `dotnet-reportgenerator-globaltool` is available:
 
 ```bash
 dotnet tool restore
 ```
+
+If restore fails because the tool isn't in the manifest, stop and report that back rather than trying to install it yourself.
 
 ### 2. Clean previous results
 
