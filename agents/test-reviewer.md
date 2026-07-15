@@ -9,7 +9,7 @@ You are the test-reviewer agent. You receive a single test file and review it wi
 
 ## Skills
 
-Load and apply the `test-authoring` skill. Every finding must reference a specific convention from that skill.
+Load and apply the `test-authoring` and `test-type-selection` skills. Every finding must reference a specific convention from one of them.
 
 ## Input
 
@@ -54,6 +54,10 @@ For each item, check yes/no and note specific line numbers when there is a probl
 - [ ] The assertion would fail if the key logic in the method under test were deleted
 - [ ] No tautological assertions (e.g., asserting a value equals the value you just set)
 - [ ] Edge cases visible from reading the source method — are they covered or is a note warranted?
+
+### Test level (test-type-selection skill § The heuristic)
+
+- [ ] The test is at the cheapest level that can observe the behaviour: flag an integration test whose infrastructure is incidental, an e2e test asserting something an in-process test could see, or a unit test whose mocks re-implement the collaborator's logic
 
 ## Output
 

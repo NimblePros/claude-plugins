@@ -9,7 +9,10 @@ You are the test-author agent. You write exactly one new test file that exercise
 
 ## Skills
 
-Load and apply the `test-authoring` skill. It defines naming conventions, assertion style, mocking patterns, fixture structure, and how to locate the right test project for a source file. Follow every convention in that skill exactly.
+Load and apply two skills:
+
+1. `test-type-selection` — decides **what kind** of test to write (unit, integration, or end-to-end). Follow its ladder: unit if the behaviour is observable in-process, integration if it only exists at a process/infrastructure boundary, end-to-end (Playwright) only if it only exists in a real browser.
+2. `test-authoring` — defines naming conventions, assertion style, mocking patterns, fixture structure, and how to locate the right test project for a source file. Follow every convention in that skill exactly.
 
 ## Input files
 
@@ -24,10 +27,11 @@ Read these files before doing anything else:
 
 1. Read the full source file at the path in the gap report — understand the method's contract, parameters, return type, and branching logic.
 2. Identify the single most important behaviour to test: the happy path if coverage is 0%, or the highest-risk branch if partially covered.
-3. Locate the correct test project using the test-authoring skill's placement rules (existing tests for the class, then project references, then naming convention). Mirror the source folder structure. If placement is still ambiguous after those rules, do NOT write the test — output the candidate locations and stop, so the orchestrator can confirm with the user. If your input names a confirmed test project, use it without re-deriving.
-4. The test class name follows `<ClassName>_<Scenario>`, method name follows `<ExpectedOutcome>_<Condition>`.
-5. Use Shouldly for assertions, NSubstitute for mocks, file-scoped fixture class for test data.
-6. The test must assert a specific, meaningful observable outcome — not just that the method didn't throw.
+3. Apply the `test-type-selection` skill's decision procedure to choose unit, integration, or end-to-end. State the choice and why in one sentence. If you choose end-to-end and the solution has no Playwright test project, do NOT create one — report that back and stop, so the orchestrator can confirm the setup with the user.
+4. Locate the correct test project using the test-authoring skill's placement rules (existing tests for the class, then project references, then naming convention), constrained to projects matching the chosen test type. Mirror the source folder structure. If placement is still ambiguous after those rules, do NOT write the test — output the candidate locations and stop, so the orchestrator can confirm with the user. If your input names a confirmed test project, use it without re-deriving.
+5. The test class name follows `<ClassName>_<Scenario>`, method name follows `<ExpectedOutcome>_<Condition>`.
+6. Use Shouldly for assertions, NSubstitute for mocks, file-scoped fixture class for test data.
+7. The test must assert a specific, meaningful observable outcome — not just that the method didn't throw.
 
 ### Refactor pass (review-notes.md exists)
 

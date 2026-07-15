@@ -111,11 +111,14 @@ Invoke the `test-author` agent (no additional input beyond the handoff files).
 The agent will:
 
 - Read `gap-report.md` to understand what to test
+- Choose the test type per the `test-type-selection` skill — unit if the behaviour is observable in-process, integration if it only exists at a process/infrastructure boundary, end-to-end (Playwright) only if it only exists in a real browser
 - Locate the correct test project (existing tests for the class, then project references, then naming convention — per the test-authoring skill)
 - Write the test file there and run it to confirm it passes green
 - Write `.claude/add-coverage-work/new-test-path.txt`
 
 **If the agent reports ambiguous test placement** instead of writing a test (e.g. multiple candidate test projects and no clear winner), present the candidates to the user, ask which to use, then re-invoke `test-author` with the confirmed test project as input.
+
+**If the agent reports that an end-to-end test is warranted but no Playwright test project exists**, ask the user whether to (a) set one up — create the project, add `Microsoft.Playwright`, run `playwright install` — or (b) skip this gap and re-run against a different target. Only proceed with setup if the user approves.
 
 ---
 

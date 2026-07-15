@@ -6,6 +6,8 @@ invocable: true
 
 # Test Authoring Conventions
 
+These conventions apply to every test regardless of kind. To decide **which kind** of test to write (unit vs. integration vs. end-to-end), load the `test-type-selection` skill first.
+
 ## Stack
 
 | Concern | Library |
@@ -15,6 +17,7 @@ invocable: true
 | Mocking | NSubstitute |
 | Blazor components | bunit |
 | API integration | `Microsoft.AspNetCore.Mvc.Testing` |
+| Browser end-to-end | `Microsoft.Playwright` |
 | Coverage | coverlet.collector |
 
 ---

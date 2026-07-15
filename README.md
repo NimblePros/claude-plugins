@@ -16,7 +16,7 @@ Running `/nimblepros:add-coverage` (or `/add-coverage` when using the standalone
 |---|---|---|
 | 0. Ensure environment | _(orchestrator)_ | Verifies/creates `coverage.runsettings`, `.config/dotnet-tools.json` entries, and required test-project NuGet packages — **only with your approval** |
 | 1. Find the gap | `coverage-gap-finder` | `gap-report.md` — highest-CRAP untested method |
-| 2. Write the test | `test-author` | New xUnit test file, passing green |
+| 2. Write the test | `test-author` | New xUnit test file (unit, integration, or Playwright e2e — the cheapest type that can observe the behaviour), passing green |
 | 3. Validate it has teeth | `mutation-validator` | `mutation-result.md` — PASS/FAIL via Stryker or manual mutation |
 | 4. Review quality | `test-reviewer` | `review-notes.md` — LGTM or numbered refactor requests |
 | 5. Commit | _(orchestrator)_ | Branch `test/add-coverage-{ClassName}` pushed |
@@ -68,6 +68,8 @@ Phase 0 of `/add-coverage` checks all of the following automatically and, where 
 - `Shouldly`
 - `NSubstitute`
 - `coverlet.collector`
+
+**Optional NuGet package** — `Microsoft.Playwright`, only needed if a coverage gap warrants an end-to-end browser test. If the `test-author` agent determines an e2e test is the right fit and no Playwright test project exists, the pipeline pauses and asks before setting one up.
 
 **Required repo file** — `coverage.runsettings` at the repo root (Phase 0 offers to create it). See the `crap-analysis` skill for the recommended content.
 
@@ -159,6 +161,16 @@ When installed via Option C (standalone copy into `.claude/`), use the short for
 
 ## Project-specific customization
 
+### Test type selection
+
+The `test-author` agent picks the cheapest test type that can actually observe the behaviour under test, per the `test-type-selection` skill:
+
+1. **Unit** — no dependency on out-of-process logic; everything runs in-process (including Blazor components via bunit).
+2. **Integration** — the behaviour only exists at a process/infrastructure boundary (real database, HTTP pipeline, file system) or across many collaborating services.
+3. **End-to-end** — the behaviour only exists in a real browser driven by user interactions; automated with Playwright.
+
+Most coverage gaps resolve to unit tests, since CRAP scoring targets complex in-process logic. The agent never drops down a level for convenience — only when the behaviour is unobservable at the current one.
+
 ### Test placement
 
 There is nothing to configure. The `test-author` agent determines where each new test belongs at runtime, in order of preference:
@@ -244,6 +256,8 @@ The `mutation-validator` falls back to a single manual mutation. To use Stryker,
     │   └── SKILL.md                          # CRAP scoring, runsettings, ReportGenerator
     ├── test-authoring/
     │   └── SKILL.md                          # xUnit conventions for this project
+    ├── test-type-selection/
+    │   └── SKILL.md                          # Unit vs. integration vs. e2e (Playwright) decision ladder
     └── stryker-dotnet/
         └── SKILL.md                          # Stryker.NET invocation and result parsing
 ```
