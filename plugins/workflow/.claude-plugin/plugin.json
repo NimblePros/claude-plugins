@@ -1,0 +1,12 @@
+{
+  "name": "workflow",
+  "description": "Issue-to-PR development workflow over the gh CLI: feature specs, implementation plans, commits, code review, and pull requests",
+  "version": "1.0.0",
+  "author": {
+    "name": "NimblePros"
+  },
+  "homepage": "https://github.com/NimblePros/claude-plugins",
+  "repository": "https://github.com/NimblePros/claude-plugins",
+  "license": "MIT",
+  "keywords": ["github", "workflow", "code-review", "pull-request", "git"]
+}

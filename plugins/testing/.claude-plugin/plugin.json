@@ -1,0 +1,12 @@
+{
+  "name": "testing",
+  "description": "Stack-neutral testing practice: end-to-end test authoring and Playwright-based issue reproduction reports",
+  "version": "1.0.0",
+  "author": {
+    "name": "NimblePros"
+  },
+  "homepage": "https://github.com/NimblePros/claude-plugins",
+  "repository": "https://github.com/NimblePros/claude-plugins",
+  "license": "MIT",
+  "keywords": ["testing", "e2e", "playwright", "quality"]
+}

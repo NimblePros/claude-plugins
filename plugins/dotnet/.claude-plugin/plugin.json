@@ -1,0 +1,12 @@
+{
+  "name": "dotnet",
+  "description": "C# and .NET practice: coding standards, package management, configuration, dependency injection, OpenTelemetry, and NuGet publishing",
+  "version": "1.0.0",
+  "author": {
+    "name": "NimblePros"
+  },
+  "homepage": "https://github.com/NimblePros/claude-plugins",
+  "repository": "https://github.com/NimblePros/claude-plugins",
+  "license": "MIT",
+  "keywords": ["dotnet", "csharp", "aspnetcore", "nuget", "opentelemetry"]
+}
