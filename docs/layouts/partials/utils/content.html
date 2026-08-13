@@ -1,0 +1,7 @@
+{{ $content := .Content }}
+
+{{ $content = $content | replaceRE `<nav id="TableOfContents">\s*<ul>\s*<li>\s*<ul>` `<nav id="TableOfContents" aria-label="Table of contents"><ul>` | replaceRE `</ul>\s*</li>\s*</ul>\s*</nav>` `</ul></nav>` | safeHTML }}
+{{ $content = $content | replaceRE `<nav id="TableOfContents">` `<nav id="TableOfContents" aria-label="Table of contents">` | safeHTML }}
+{{ $content = $content | replaceRE `(<table>(?:.|\n)+?</table>)` `<div class="table-wrap"> ${1} </div>` | safeHTML }}
+
+{{ return $content }}

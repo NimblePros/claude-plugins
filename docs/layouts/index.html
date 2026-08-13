@@ -1,0 +1,17 @@
+{{ define "main" }}
+<div class="gdoc-home" id="main-content" tabindex="-1">
+  <div class="gdoc-home__header">
+    {{ if .Site.Params.geekdocLogo }}
+    <img src="{{ .Site.Params.geekdocLogo | relURL }}" alt="{{ .Site.Title }} logo" class="homepage-logo">
+    {{ end }}
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.lead }}
+    <p class="gdoc-home__lead">{{ . | safeHTML }}</p>
+    {{ end }}
+    <a href="/docs/" class="gdoc-button gdoc-button--large">Get Started</a>
+  </div>
+  <div class="gdoc-home__content">
+    {{ .Content }}
+  </div>
+</div>
+{{ end }}
