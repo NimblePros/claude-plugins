@@ -98,7 +98,8 @@ equivalent mechanical checks, run via `python tests/validate_marketplace.py` plu
 ## Phase 6 — PR
 
 - [x] Commit in coherent chunks, push branch
-- [ ] `gh pr create` with summary, verification results, and `Fixes #2`
+- [x] `gh pr create` with summary, verification results, and `Fixes #2` —
+      https://github.com/NimblePros/claude-plugins/pull/3
 
 ## Review findings
 
