@@ -1,6 +1,6 @@
-# NimblePros Claude Code Plugin
+# NimblePros Claude Code Plugins
 
-This plugin currently contains a command for adding coverage to complex methods within dotnet projects. Other skills, commands, and agents may be added in the future.
+A collection of plug-ins authored, curated, and/or edited by the NimblePros team.
 
 ---
 
