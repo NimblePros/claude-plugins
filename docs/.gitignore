@@ -1,0 +1,28 @@
+# Hugo build artifacts
+/public/
+/resources/
+.hugo_build.lock
+
+# Hugo theme (downloaded via serve.cs / build.sh - not committed)
+/themes/
+
+# Hugo binary downloaded by serve.cs when not in PATH
+/.hugo-bin/
+
+# Hugo stats
+hugo_stats.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp

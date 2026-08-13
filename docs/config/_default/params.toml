@@ -1,0 +1,34 @@
+# NimblePros Claude Plugins Documentation - Geekdoc Configuration
+
+# Site Information
+title = "NimblePros Claude Plugins"
+description = "Documentation for the NimblePros Claude Code plugin marketplace"
+
+# Geekdoc configuration
+geekdocRepo = "https://github.com/NimblePros/claude-plugins"
+geekdocEditPath = "edit/main/docs/content"
+geekdocDateFormat = "January 2, 2006"
+
+# Features
+geekdocSearch = true
+geekdocSearchShowParent = true
+geekdocDarkMode = true
+geekdocDarkModeToggle = true
+geekdocDarkModeCode = true
+
+# Navigation
+geekdocBreadcrumb = true
+geekdocNextPrev = true
+geekdocMenuBundle = false
+geekdocTagsToMenu = false
+
+# TOC
+geekdocToC = true
+geekdocToCDepth = 3
+
+# Footer
+geekdocBackToTop = true
+
+# Metadata
+[geekdocContentLicense]
+  name = "Copyright (c) 2026 NimblePros"
