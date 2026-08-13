@@ -94,7 +94,10 @@ When installed via Option C (standalone copy into `.claude/`), use the short for
 ## Migrating from the single `nimblepros` plugin
 
 This repository previously published one plugin containing everything, installed as
-`nimblepros@nimblepros`. That plugin no longer exists. To migrate:
+`nimblepros@nimblepros`. That plugin no longer exists. Claude Code v2.1.193 and later migrate
+automatically — the marketplace records the removal in its `renames` map, so the stale entry is
+dropped from your settings with a one-line notice. On earlier versions, or to pick your
+replacements explicitly:
 
 ```bash
 claude plugin uninstall nimblepros@nimblepros
@@ -132,7 +135,8 @@ recorded in
 │   └── workflow/
 ├── devdocs/
 │   └── ADRs/                     # architecture decision records
-├── docs/
+├── tests/
+│   └── validate_marketplace.py   # structural validation (python tests/validate_marketplace.py)
 └── README.md
 ```
 

@@ -71,5 +71,8 @@
       "keywords": ["github", "workflow", "code-review", "pull-request", "git"],
       "category": "productivity"
     }
-  ]
+  ],
+  "renames": {
+    "nimblepros": null
+  }
 }

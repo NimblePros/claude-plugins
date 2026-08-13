@@ -21,6 +21,8 @@ claude plugin install testing@nimblepros
 
 ## Related plugins
 
-If your stack is .NET, install [`dotnet-testing`](../dotnet-testing/) as well — it carries the
+If your stack is .NET, install
+[`dotnet-testing`](https://github.com/NimblePros/claude-plugins/tree/main/plugins/dotnet-testing)
+as well — it carries the
 xUnit conventions, coverage analysis, and mutation testing that this plugin deliberately leaves
 out.

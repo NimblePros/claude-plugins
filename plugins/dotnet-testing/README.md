@@ -10,7 +10,7 @@ claude plugin install dotnet-testing@nimblepros
 
 This plugin is deliberately .NET-specific — it depends on `dotnet test`, ReportGenerator,
 Stryker.NET, xUnit, Shouldly, and NSubstitute. For stack-neutral testing practice, see the
-[`testing`](../testing/) plugin.
+[`testing`](https://github.com/NimblePros/claude-plugins/tree/main/plugins/testing) plugin.
 
 ---
 

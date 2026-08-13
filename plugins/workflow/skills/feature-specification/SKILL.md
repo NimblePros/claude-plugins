@@ -40,7 +40,7 @@ Create a feature specification file at `.claude/specs/<issue-number>-<short-titl
 After the header sections, define sequential implementation phases. Each phase must be completable and testable before the next begins. Use this structure for each phase:
 
 ```markdown
-## Phase 1: <Name> — <dotnet-agent | react-agent | test-agent>
+## Phase 1: <Name> — <the agent or role that executes this phase>
 
 **Goal**: <One sentence describing what this phase delivers>
 
@@ -64,12 +64,14 @@ After the header sections, define sequential implementation phases. Each phase m
 
 Structure phases in this order where applicable:
 
-1. **Data layer** (dotnet-agent): entities, EF Core migrations, repositories
-2. **API layer** (dotnet-agent): endpoints, validation, business logic
-3. **UI layer** (react-agent): components, forms, API integration
-4. **Tests** (test-agent): unit tests for .NET and React, Playwright e2e for the happy path
+1. **Data layer**: entities, migrations, repositories
+2. **API layer**: endpoints, validation, business logic
+3. **UI layer**: components, forms, API integration
+4. **Tests**: unit tests for each layer, end-to-end coverage of the happy path
 
-Each phase must name which agent executes it.
+Each phase must name who executes it — use whichever implementation agents this project actually
+has (check the available agent list), or a plain role name such as "backend" or "UI" when there
+is no matching agent.
 
 ## Guidelines
 
