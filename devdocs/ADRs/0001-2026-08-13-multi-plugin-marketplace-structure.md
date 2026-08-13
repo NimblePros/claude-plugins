@@ -148,11 +148,14 @@ directory is not installable and advertises a capability that does not exist.
   document as a prerequisite. Today no skill is needed by two plugins; when one is, that is the
   decision point.
 - **More manifests to maintain.** Five `plugin.json` files plus the marketplace catalog can drift
-  out of sync. Mitigation: `tests/validate_marketplace.py` ships with this change and checks that
+  out of sync. Mitigation: `scripts/ValidateMarketplace.cs` ships with this change and checks that
   every `source` in `marketplace.json` resolves to a directory containing
   `.claude-plugin/plugin.json`, that every plugin directory is catalogued, and that no agent or
-  command loads a skill from another plugin. `claude plugin validate .` covers the manifest
-  schema itself. Neither runs automatically yet — see Future Considerations.
+  command loads a skill from another plugin. It is a .NET 10 file-based app — a single `.cs` file
+  run with `dotnet run`, no project file and no restore — so a repository whose subject is .NET
+  practice does not take on a second language toolchain to validate itself.
+  `claude plugin validate .` covers the manifest schema itself. Neither runs automatically yet —
+  see Future Considerations.
 - **Taxonomy is a judgment call and will be wrong somewhere.** `aspire-integration-testing` could
   defensibly sit in `dotnet` rather than `dotnet-testing`; `technical-writer` could sit in a
   future `docs` plugin. Moving a skill between plugins later is a breaking change for whoever
@@ -203,7 +206,7 @@ add the deferred `frontend`, `databases`, and `devops` plugins.
   in `testing` if stack-neutral, `dotnet-testing` if it depends on xUnit/.NET tooling.
 - Audit each `SKILL.md` against the ~500-line guidance and split the long ones into supporting
   files. No current skill exceeds it, so this is maintenance rather than remediation.
-- Wire `tests/validate_marketplace.py` and `claude plugin validate .` into CI. The repository has
+- Wire `scripts/ValidateMarketplace.cs` and `claude plugin validate .` into CI. The repository has
   no `.github/workflows/` at all today, so both are manual.
 - Genericize content that still assumes one specific repository now that it ships to others:
   `technical-writer` hard-codes a Hugo/Geekdoc site layout in its body, and `publish-nuget`

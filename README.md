@@ -135,8 +135,8 @@ recorded in
 │   └── workflow/
 ├── devdocs/
 │   └── ADRs/                     # architecture decision records
-├── tests/
-│   └── validate_marketplace.py   # structural validation (python tests/validate_marketplace.py)
+├── scripts/
+│   └── ValidateMarketplace.cs    # structural validation (dotnet run scripts/ValidateMarketplace.cs)
 └── README.md
 ```
 
@@ -150,3 +150,12 @@ recorded in
 - Keep each `SKILL.md` under ~500 lines, moving detail into supporting files so agents can skip
   loading what they don't need.
 - Structural decisions get an ADR in [`devdocs/ADRs/`](devdocs/ADRs/).
+
+Before opening a PR, run both validators:
+
+```bash
+dotnet run scripts/ValidateMarketplace.cs   # repository structure (needs the .NET 10 SDK)
+claude plugin validate .                    # manifest schema
+```
+
+`ValidateMarketplace.cs` is a file-based app — no project file, no restore, just run it.

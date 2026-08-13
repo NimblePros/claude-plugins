@@ -66,9 +66,9 @@ plugin depends on another being installed.
 
 ## Phase 4 — Automated verification
 
-This repository contains no compiled code, so `dotnet BuildTestFormat.cs` does not apply. The
-equivalent mechanical checks, run via `python tests/validate_marketplace.py` plus
-`claude plugin validate .`:
+This repository contains no application code, so `dotnet BuildTestFormat.cs` does not apply. The
+equivalent mechanical checks, run via `dotnet run scripts/ValidateMarketplace.cs` (a .NET 10
+file-based app — no project file, no restore) plus `claude plugin validate .`:
 
 - [x] Every `*.json` manifest parses; `claude plugin validate .` passes against the real schema
 - [x] Every `marketplace.json` `source` path starts with `./`, exists, and contains
@@ -101,6 +101,13 @@ equivalent mechanical checks, run via `python tests/validate_marketplace.py` plu
 - [x] `gh pr create` with summary, verification results, and `Fixes #2` —
       https://github.com/NimblePros/claude-plugins/pull/3
 
+## Post-review change: validator language
+
+The validation script was first written in Python. Rewritten as `scripts/ValidateMarketplace.cs`,
+a .NET 10 file-based app, so a .NET-focused repository does not require a Python toolchain to
+validate itself. Behaviour is unchanged — same checks, same output, same exit codes — and each
+check was re-verified adversarially against the C# version in a scratch copy of the repo.
+
 ## Review findings
 
 The review agent raised 15 findings. Its verification also confirmed, independently, that all
@@ -126,10 +133,10 @@ Addressed:
    pass. The summary now prints only when there are no errors.
 8. **ADR listed the validation script as future work** although it shipped in the same change.
    Moved to the Consequences mitigation; only "wire it into CI" remains as future work.
-9. **ADR cited a PR checklist that does not exist.** Now points at `tests/validate_marketplace.py`.
+9. **ADR cited a PR checklist that does not exist.** Now points at `scripts/ValidateMarketplace.cs`.
 10. **ADR arithmetic** — "twelve files" for 1 command + 4 agents + 4 skills. Now "nine".
 11. **README layout tree listed a `docs/` directory** that is not in the repository. Removed, and
-    the empty local directory deleted; `tests/` added to the tree instead.
+    the empty local directory deleted; `scripts/` added to the tree instead.
 14. **Plugin READMEs used relative sibling links** (`../dotnet-testing/`) that are dead once a
     plugin is installed on its own. Now absolute GitHub URLs.
 15. **Two disagreeing ADR conventions now ship in one repo** (this repo's plain-heading style vs.
