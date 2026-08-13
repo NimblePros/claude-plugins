@@ -1,23 +1,78 @@
 {
   "$schema": "https://code.claude.com/schemas/marketplace.json",
   "name": "nimblepros",
-  "description": "NimblePros Claude Code plugins for .NET development workflows.",
+  "description": "NimblePros Claude Code plugins for .NET, architecture, testing, and development workflow.",
   "owner": {
     "name": "NimblePros"
   },
   "plugins": [
     {
-      "name": "nimblepros",
-      "source": ".",
-      "description": "Developer command toolkit for Claude",
+      "name": "dotnet",
+      "source": "./plugins/dotnet",
+      "description": "C# and .NET practice: coding standards, package management, configuration, dependency injection, OpenTelemetry, and NuGet publishing",
       "author": {
         "name": "NimblePros"
       },
-      "homepage": "https://github.com/NimblePros/claude-plugin",
-      "repository": "https://github.com/NimblePros/claude-plugin",
+      "homepage": "https://github.com/NimblePros/claude-plugins",
+      "repository": "https://github.com/NimblePros/claude-plugins",
+      "license": "MIT",
+      "keywords": ["dotnet", "csharp", "aspnetcore", "nuget", "opentelemetry"],
+      "category": "development"
+    },
+    {
+      "name": "dotnet-testing",
+      "source": "./plugins/dotnet-testing",
+      "description": ".NET testing toolkit: the /add-coverage pipeline, CRAP analysis, Stryker.NET mutation testing, xUnit conventions, and Aspire integration testing",
+      "author": {
+        "name": "NimblePros"
+      },
+      "homepage": "https://github.com/NimblePros/claude-plugins",
+      "repository": "https://github.com/NimblePros/claude-plugins",
       "license": "MIT",
       "keywords": ["dotnet", "testing", "coverage", "xunit", "mutation-testing"],
       "category": "testing"
+    },
+    {
+      "name": "testing",
+      "source": "./plugins/testing",
+      "description": "Stack-neutral testing practice: end-to-end test authoring and Playwright-based issue reproduction reports",
+      "author": {
+        "name": "NimblePros"
+      },
+      "homepage": "https://github.com/NimblePros/claude-plugins",
+      "repository": "https://github.com/NimblePros/claude-plugins",
+      "license": "MIT",
+      "keywords": ["testing", "e2e", "playwright", "quality"],
+      "category": "testing"
+    },
+    {
+      "name": "architecture",
+      "source": "./plugins/architecture",
+      "description": "Architecture decisions and technical documentation: writing ADRs and producing clear developer-facing docs",
+      "author": {
+        "name": "NimblePros"
+      },
+      "homepage": "https://github.com/NimblePros/claude-plugins",
+      "repository": "https://github.com/NimblePros/claude-plugins",
+      "license": "MIT",
+      "keywords": ["architecture", "adr", "documentation", "design"],
+      "category": "documentation"
+    },
+    {
+      "name": "workflow",
+      "source": "./plugins/workflow",
+      "description": "Issue-to-PR development workflow over the gh CLI: feature specs, implementation plans, commits, code review, and pull requests",
+      "author": {
+        "name": "NimblePros"
+      },
+      "homepage": "https://github.com/NimblePros/claude-plugins",
+      "repository": "https://github.com/NimblePros/claude-plugins",
+      "license": "MIT",
+      "keywords": ["github", "workflow", "code-review", "pull-request", "git"],
+      "category": "productivity"
     }
-  ]
+  ],
+  "renames": {
+    "nimblepros": null
+  }
 }

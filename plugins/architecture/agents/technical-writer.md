@@ -1,6 +1,6 @@
 ---
 name: technical-writer
-description: "Use this agent when you need to create, improve, or review technical documentation, including API documentation, README files, user guides, tutorials, architecture decision records (ADRs), changelogs, inline code comments, or any written content intended to explain technical concepts to developers or end users. This agent specializes in ensuring clarity, accuracy, and comprehensiveness in technical writing, making complex information accessible and actionable for the intended audience. This project uses Hugo with the Geekdoc theme for documentation, so familiarity with markdown and Hugo conventions is important."
+description: "Use this agent when you need to create, improve, or review technical documentation, including API documentation, README files, user guides, tutorials, architecture decision records (ADRs), changelogs, inline code comments, or any written content intended to explain technical concepts to developers or end users. This agent specializes in ensuring clarity, accuracy, and comprehensiveness in technical writing, making complex information accessible and actionable for the intended audience. Examples throughout assume a Hugo documentation site (Geekdoc theme); adapt the paths and commands to whatever documentation tooling the project actually uses."
 model: sonnet
 color: orange
 memory: project
