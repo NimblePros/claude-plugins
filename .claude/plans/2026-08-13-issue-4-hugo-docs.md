@@ -1,7 +1,7 @@
 # Issue 4 — Add Hugo Docs
 
 **GitHub Issue**: #4
-**Status**: Implemented — PR pending merge
+**Status**: Implemented — [PR #5](https://github.com/NimblePros/claude-plugins/pull/5) pending merge
 
 ## Overview
 
