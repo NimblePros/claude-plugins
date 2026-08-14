@@ -62,8 +62,9 @@ Write a phased, task-based markdown plan to `.claude/plans/` **before writing an
     **separate agent** (fresh context, not the implementing agent), with a task to address
     all significant findings from that review.
   - **A final verification phase** — the application builds, all tests pass, and
-    `dotnet format` produces no changes. In this repo that means running
-    `dotnet BuildTestFormat.cs` and getting a clean result.
+    `dotnet format` produces no changes. Confirm with `dotnet build`, `dotnet test`, and
+    `dotnet format --verify-no-changes`, or use the repo's equivalent verification script if
+    one exists.
 - Check the plan boxes off as work proceeds so the plan reflects actual progress.
 
 ### 3. Implement the plan
@@ -93,8 +94,9 @@ Confirm (or re-confirm, if step 4 changed anything):
 - All tests pass.
 - `dotnet format` reports nothing to change.
 
-In this repo, `dotnet BuildTestFormat.cs` covers all three — it must complete cleanly
-before moving on. Never skip, weaken, or disable tests to get to green.
+Run `dotnet build`, `dotnet test`, and `dotnet format --verify-no-changes` (or the repo's
+equivalent verification script) — all three must complete cleanly before moving on. Never
+skip, weaken, or disable tests to get to green.
 
 ### 6. Create the pull request
 
@@ -117,7 +119,7 @@ End with a chat summary covering:
 ## Guardrails
 
 - Do not start implementing before the plan file exists in `.claude/plans`.
-- Do not claim the work is complete unless `dotnet BuildTestFormat.cs` ran cleanly after
+- Do not claim the work is complete unless the build, tests, and format check all passed cleanly after
   the last code change.
 - Do not mark review findings as addressed without actually changing the code or recording
   an explicit reason for skipping them.

@@ -22,7 +22,7 @@ claude plugin install dotnet@nimblepros
 | Agent | Purpose |
 |---|---|
 | `dotnet-agent` | Implements server-side features in C#/.NET/ASP.NET Core/EF Core from an approved specification. |
-| `publish-nuget` | Version bump, changelog, metadata validation, pack, and push to NuGet.org. Its example paths target `Nimble.Endpoints`; point it at your own `.csproj` when using it elsewhere. |
+| `publish-nuget` | Version bump, changelog, metadata validation, pack, and push to NuGet.org. |
 
 ## Related plugins
 

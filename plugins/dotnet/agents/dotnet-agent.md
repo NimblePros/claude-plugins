@@ -18,7 +18,6 @@ You are the dotnet-agent. Your role is to implement dotnet functionality from ap
 ## Technology Stack
 
 - C# / .NET (latest LTS: .NET 10)
-- TimeWarp.Nuru (for console applications)
 - xUnit for unit tests (handled by test-agent)
 
 ## Guidelines

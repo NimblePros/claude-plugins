@@ -40,8 +40,8 @@ Read git blame and history of modified files. Check for conflicts with recent ch
 For each modified file, check all callers and consumers. Flag if a shared file was changed without considering all code paths that use it. This is the #1 cause of errors that make it into production.
 
 **Agent: Project Convention Check**
-Check CI-specific rules:
-- Branch name matches `^[a-zA-Z0-9-]+\/(release|hotfix)$` (if reviewing a PR)
+Check project-specific rules:
+- Branch name follows the project's naming convention (check CONTRIBUTING.md, CI config, or recent branch names for the pattern)
 - PR title follows conventional commit format, under 65 chars
 
 **Agent: Security and Secrets Check**
