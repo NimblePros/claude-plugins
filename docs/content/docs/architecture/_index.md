@@ -13,6 +13,12 @@ architecture philosophy does not live inside a language plugin.
 claude plugin install architecture@nimblepros
 ```
 
+## Commands
+
+| Command | One-line summary |
+|---|---|
+| [`/architecture:adr`]({{< ref "adr-writing" >}}) | Draft, review, and register a new ADR for a design or technology decision |
+
 ## Skills
 
 | Skill | One-line summary |

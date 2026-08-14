@@ -17,11 +17,13 @@ This plugin is deliberately .NET-specific — it depends on `dotnet test`, Repor
 Stryker.NET, xUnit, Shouldly, and NSubstitute. For stack-neutral testing practice, see the
 [testing]({{< ref "/docs/testing" >}}) plugin.
 
-## The command
+## Commands
 
-[`/dotnet-testing:add-coverage`]({{< ref "add-coverage" >}}) orchestrates the four agents below
-through a six-phase pipeline: find the gap → write the test → validate it has teeth → review →
-commit → open PR. It is the reason most of this plugin's skills and agents exist.
+| Command | One-line summary |
+|---|---|
+| [`/dotnet-testing:add-coverage`]({{< ref "add-coverage" >}}) | Six-phase pipeline: find the highest-CRAP gap → write test → validate it has teeth → review → commit → open PR |
+| [`/dotnet-testing:crap-analysis`]({{< ref "crap-analysis" >}}) | Collect coverage, generate a CRAP score report, surface the top risk hotspots |
+| [`/dotnet-testing:mutation-test`]({{< ref "stryker-dotnet" >}}) | Run Stryker.NET against a source file or class, report killed vs. survived mutations |
 
 ## Skills
 

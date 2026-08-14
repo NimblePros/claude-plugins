@@ -10,6 +10,8 @@ weight: 50
 > (local tool), scoped invocation, JSON output parsing, and interpreting killed/survived results
 > to decide pass/fail.
 
+Invoke standalone with `/dotnet-testing:mutation-test <source-file-or-class-name>`.
+
 ## What it covers
 
 Mutation-testing mechanics — the five mutant statuses (Killed, Survived, NoCoverage, Timeout,

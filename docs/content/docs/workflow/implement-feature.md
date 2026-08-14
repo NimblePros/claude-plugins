@@ -12,6 +12,8 @@ weight: 20
 > and opens a pull request that references the issue. Use whenever asked to implement, fix, or
 > work on a GitHub issue by number or URL.
 
+Invoke with `/workflow:implement <issue-number-or-url>`.
+
 ## What it covers
 
 The plugin's flagship seven-step loop:
@@ -41,5 +43,5 @@ live in `.claude/plans/`, specs in `.claude/specs/`). The skill directs Claude t
 relevant domain skills during implementation — e.g.
 [test-authoring]({{< ref "/docs/dotnet-testing/test-authoring" >}}) from `dotnet-testing` on a
 .NET project. Its verification examples reference a .NET build/format harness; substitute your
-own stack's equivalent. Requires `git` and an authenticated `gh`. Not slash-invocable — it
-triggers whenever you ask Claude to implement or fix an issue by number or URL.
+own stack's equivalent. Requires `git` and an authenticated `gh`. Also triggers whenever you ask Claude to implement
+or fix an issue by number or URL without the slash command.

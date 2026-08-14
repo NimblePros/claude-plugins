@@ -30,7 +30,7 @@ This plugin offers the same journey at two granularities:
 | Skill | Invoke | One-line summary |
 |---|---|---|
 | [feature-specification]({{< ref "feature-specification" >}}) | — | The structured spec format written to `.claude/specs/`, with phased checklists and verifiable "Done When" criteria |
-| [implement-feature]({{< ref "implement-feature" >}}) | — | The end-to-end issue workflow: context → plan → implement → independent review → verify → PR |
+| [implement-feature]({{< ref "implement-feature" >}}) | `/workflow:implement` | The end-to-end issue workflow: context → plan → implement → independent review → verify → PR |
 | [commit]({{< ref "commit" >}}) | `/workflow:commit` | Conversation-aware commit messages following Conventional Commits |
 | [pr]({{< ref "pr" >}}) | `/workflow:pr` | Full PR lifecycle: context, merge-from-main validation, templated `gh pr create`, verification |
 | [review]({{< ref "review" >}}) | `/workflow:review` | Five parallel review agents over a local diff or PR, with confidence-scored findings |

@@ -11,6 +11,8 @@ weight: 10
 > duplicate ADR numbers from parallel branches. Load before creating, revising, or superseding
 > any ADR, or when asked to check for duplicate ADR numbers or fix the ADR list.
 
+Invoke with `/architecture:adr "<decision-description>"` or `/architecture:adr --issue <N>`.
+
 ## What it covers
 
 The full authoring workflow, with one meta-rule above all: **existing repository conventions win

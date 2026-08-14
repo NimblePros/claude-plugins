@@ -10,6 +10,8 @@ weight: 20
 > Use OpenCover format with ReportGenerator for Risk Hotspots showing cyclomatic complexity and
 > untested code paths.
 
+Invoke standalone with `/dotnet-testing:crap-analysis [project-or-namespace-filter]`.
+
 ## What it covers
 
 The CRAP formula — `comp(m)² × (1 − cov(m)/100)³ + comp(m)` — and how to read it: under 5 is
