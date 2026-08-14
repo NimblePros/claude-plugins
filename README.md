@@ -34,7 +34,7 @@ claude plugin install <plugin>@nimblepros
 ```
 
 This installs that plugin's commands, agents, and skills into your global Claude Code
-configuration so they are available in every project.
+configuration so they are available in every project you use on the current machine.
 
 ### Option B — Per-project install via `.claude/settings.json`
 
