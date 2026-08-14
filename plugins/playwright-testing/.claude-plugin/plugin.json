@@ -1,0 +1,12 @@
+{
+  "name": "playwright-testing",
+  "description": "Playwright-focused testing: E2E test authoring, issue reproduction reports, and refactoring generated .NET Playwright tests",
+  "version": "1.0.0",
+  "author": {
+    "name": "NimblePros"
+  },
+  "homepage": "https://github.com/NimblePros/claude-plugins",
+  "repository": "https://github.com/NimblePros/claude-plugins",
+  "license": "MIT",
+  "keywords": ["testing", "e2e", "playwright", "quality", "dotnet"]
+}

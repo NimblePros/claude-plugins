@@ -9,8 +9,9 @@ claude plugin install dotnet-testing@nimblepros
 ```
 
 This plugin is deliberately .NET-specific — it depends on `dotnet test`, ReportGenerator,
-Stryker.NET, xUnit, Shouldly, and NSubstitute. For stack-neutral testing practice, see the
-[`testing`](https://github.com/NimblePros/claude-plugins/tree/main/plugins/testing) plugin.
+Stryker.NET, xUnit, Shouldly, and NSubstitute. For Playwright-focused testing (E2E authoring,
+issue reproduction, and .NET Playwright refactoring), see the
+[`playwright-testing`](https://github.com/NimblePros/claude-plugins/tree/main/plugins/playwright-testing) plugin.
 
 ---
 
@@ -57,7 +58,6 @@ anything silently — it always explains what's missing and asks first.
 | `test-type-selection` | The unit → integration → e2e decision ladder: pick the cheapest type that can actually observe the behaviour. |
 | `stryker-dotnet` | Stryker.NET installation, scoped invocation, JSON output parsing, killed/survived interpretation. |
 | `aspire-integration-testing` | Integration tests with .NET Aspire's testing facilities: fixtures, distributed app setup, endpoint discovery. |
-| `playwright-dotnet-refactor` | Cleaning up generated Playwright .NET drafts into readable xUnit tests with role-based locators. |
 
 ## Agents
 

@@ -1,10 +1,10 @@
-# testing
+# playwright-testing
 
-Stack-neutral testing practice — nothing here assumes .NET.
+Playwright-focused testing — E2E authoring, issue reproduction, and .NET test refactoring.
 
 ```bash
 claude plugin marketplace add NimblePros/claude-plugins
-claude plugin install testing@nimblepros
+claude plugin install playwright-testing@nimblepros
 ```
 
 ## Skills
@@ -12,6 +12,7 @@ claude plugin install testing@nimblepros
 | Skill | What it covers |
 |---|---|
 | `playwright-issue-repro-report` | Turn a GitHub issue into a reproducible Playwright scenario, capture screenshot/video/trace artifacts, and post a structured evidence comment. |
+| `playwright-dotnet-refactor` | Clean up generated Playwright .NET codegen drafts into readable xUnit tests with role-based locators and intent-based assertions. |
 
 ## Agents
 
@@ -21,8 +22,6 @@ claude plugin install testing@nimblepros
 
 ## Related plugins
 
-If your stack is .NET, install
+If your stack is .NET, also install
 [`dotnet-testing`](https://github.com/NimblePros/claude-plugins/tree/main/plugins/dotnet-testing)
-as well — it carries the
-xUnit conventions, coverage analysis, and mutation testing that this plugin deliberately leaves
-out.
+— it carries xUnit conventions, coverage analysis, and mutation testing.
