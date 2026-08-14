@@ -6,7 +6,8 @@ date: 2026-08-13
 weight: 50
 ---
 
-Stack-neutral testing practice — nothing here assumes .NET.
+Playwright-focused testing practice. Most content is stack-neutral; the
+[`/playwright-testing:refactor-tests`]({{< ref "refactor-tests" >}}) command is .NET-specific.
 
 ```bash
 claude plugin install testing@nimblepros
@@ -36,9 +37,12 @@ the messy edge cases: flaky tests, CI-only failures, auth bypass via API or stor
 database seeding. It keeps project-scoped memory of framework versions, fixtures, known flaky
 tests, and selector conventions across sessions.
 
-The agent and skill are independent — the agent doesn't load the skill — but they pair
-naturally: `e2e-tester` builds and maintains suites, while the repro-report skill turns
-individual bug reports into evidence.
+The agent and skills are independent — the agent doesn't load any skill — but they pair
+naturally: `e2e-tester` builds and maintains suites, while
+[`playwright-issue-repro-report`]({{< ref "playwright-issue-repro-report" >}}) turns individual
+bug reports into evidence and
+[`playwright-design-review`]({{< ref "playwright-design-review" >}}) audits implementations
+against design assets.
 
 ## Related plugins
 

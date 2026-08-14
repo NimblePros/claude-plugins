@@ -32,9 +32,14 @@ This plugin offers the same journey at two granularities:
 | [feature-specification]({{< ref "feature-specification" >}}) | — | The structured spec format written to `.claude/specs/`, with phased checklists and verifiable "Done When" criteria |
 | [implement-feature]({{< ref "implement-feature" >}}) | — | The end-to-end issue workflow: context → plan → implement → independent review → verify → PR |
 | [commit]({{< ref "commit" >}}) | `/workflow:commit` | Conversation-aware commit messages following Conventional Commits |
-| [conventional-commit]({{< ref "conventional-commit" >}}) | — | The Conventional Commits reference for commit messages and PR titles |
 | [pr]({{< ref "pr" >}}) | `/workflow:pr` | Full PR lifecycle: context, merge-from-main validation, templated `gh pr create`, verification |
 | [review]({{< ref "review" >}}) | `/workflow:review` | Five parallel review agents over a local diff or PR, with confidence-scored findings |
+
+## Reference
+
+| Page | What it is |
+|---|---|
+| [conventional-commit]({{< ref "conventional-commit" >}}) | The Conventional Commits format reference: type taxonomy, scope, SemVer impact, and the PR-title format. Not an installable skill — loaded by `commit` and cited by `pr-agent` and the [pr]({{< ref "pr" >}}) skill. |
 
 ## Agents
 
