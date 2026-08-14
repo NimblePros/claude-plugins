@@ -43,3 +43,5 @@ Optional body (ONLY when the subject alone is not enough).
 ```
 
 See [references/conventions.md](references/conventions.md) for the full format specification and examples.
+
+> The same format applies to pull request titles.
