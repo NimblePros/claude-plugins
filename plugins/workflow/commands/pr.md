@@ -1,6 +1,6 @@
 ---
 description: Merge latest main, create a pull request with a conventional-format title and structured body, and verify deployment.
-argument-hint: [--target <branch>] [--work-item <id>] [--draft]
+argument-hint: "[--target <branch>] [--work-item <id>] [--draft]"
 allowed-tools: Bash(git *), Bash(gh *)
 ---
 
