@@ -1,14 +1,15 @@
 ---
 name: opentelemetry-dotnet-instrumentation
 description: Provides guidance for implementing OpenTelemetry instrumentation in .NET codebases, covering tracing (Activities/Spans), metrics, naming conventions, error handling, performance, and API design best practices.
-version: 1.0.0
-tags:
-  - opentelemetry
-  - dotnet
-  - observability
-  - tracing
-  - metrics
-  - performance
+metadata:
+  version: 1.0.0
+  tags:
+    - opentelemetry
+    - dotnet
+    - observability
+    - tracing
+    - metrics
+    - performance
 ---
 
 # OpenTelemetry .NET Instrumentation Skill
