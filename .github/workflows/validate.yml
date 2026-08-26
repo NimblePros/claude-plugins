@@ -1,0 +1,73 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Validation is only as current as the CLI doing it, so this tracks the latest
+  # release. Pin to an exact version here if an upstream change ever breaks CI.
+  CLAUDE_CODE_VERSION: latest
+  # github.com/agentskills/agentskills — the reference Agent Skills validator is
+  # not published to PyPI, so it is installed from a pinned commit.
+  SKILLS_REF_COMMIT: 69ef37e9424c0a7ea9dd2293b559e43ec8176379
+
+jobs:
+  validate:
+    name: Validate plugins and skills
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Install validators
+        run: |
+          npm install -g "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}"
+          pip install "git+https://github.com/agentskills/agentskills.git@${SKILLS_REF_COMMIT}#subdirectory=skills-ref"
+          claude --version
+
+      # Schema of the catalog itself: plugin entries, sources, owner, keywords.
+      - name: Validate marketplace manifest
+        run: claude plugin validate . --strict
+
+      # Schema of each plugin manifest plus the frontmatter of every skill,
+      # agent, and command it ships. --strict fails on warnings the runtime
+      # would otherwise swallow silently.
+      - name: Validate each plugin
+        run: |
+          status=0
+          for plugin in plugins/*/; do
+            echo "::group::${plugin}"
+            claude plugin validate "$plugin" --strict || status=1
+            echo "::endgroup::"
+          done
+          exit $status
+
+      # Every SKILL.md against the portable Agent Skills spec.
+      - name: Validate skills
+        run: python scripts/validate_skills.py
+
+      # How the pieces fit together: catalog vs. manifests vs. on-disk layout,
+      # and no plugin depending on a skill that ships in a different plugin.
+      - name: Validate repository structure
+        run: dotnet run scripts/ValidateMarketplace.cs
