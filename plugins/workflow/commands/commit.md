@@ -1,6 +1,6 @@
 ---
 description: Stage and commit changes following the project's conventional commit format.
-argument-hint: [type(scope): message] [--work-item <id>]
+argument-hint: "[type(scope): message] [--work-item <id>]"
 allowed-tools: Bash(git *)
 ---
 

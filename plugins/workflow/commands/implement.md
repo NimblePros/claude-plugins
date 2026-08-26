@@ -1,5 +1,5 @@
 ---
-description: Implement a GitHub issue end-to-end: fetch context, plan, implement, review, and open a PR.
+description: "Implement a GitHub issue end-to-end: fetch context, plan, implement, review, and open a PR."
 argument-hint: <issue-number-or-url>
 allowed-tools: Bash(dotnet *), Bash(git *), Bash(gh *), Write, Edit, Read, Glob
 ---

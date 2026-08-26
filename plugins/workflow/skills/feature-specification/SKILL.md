@@ -5,7 +5,18 @@ description: Generates a structured feature specification markdown file from a G
 
 # Feature Specification
 
-Create a feature specification file at `.claude/specs/<issue-number>-<short-title>.md` using the structure below.
+## Configuration
+
+Resolve the spec directory before writing anything:
+
+```bash
+dotnet "${CLAUDE_PLUGIN_ROOT}/scripts/resolve-config.cs"
+```
+
+Use the `specsDir` value it prints. If that command cannot be run for any reason, use the
+default `.claude/specs` and carry on — never stop to ask where the file goes.
+
+Create a feature specification file at `<specsDir>/<issue-number>-<short-title>.md` using the structure below.
 
 ## Spec Format
 
