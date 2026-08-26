@@ -5,8 +5,8 @@
   weight = 5
 
 [[main]]
-  name = "Docs"
-  url = "/docs/"
+  name = "Getting Started"
+  url = "/getting-started/"
   weight = 10
 
 [[main]]
@@ -28,8 +28,8 @@
   weight = 5
 
 [[footer]]
-  name = "Docs"
-  url = "/docs/"
+  name = "Getting Started"
+  url = "/getting-started/"
   weight = 10
 
 [[footer]]

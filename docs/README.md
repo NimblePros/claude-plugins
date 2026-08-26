@@ -20,7 +20,7 @@ dotnet run serve.cs
 ```
 
 This downloads the Geekdoc theme and a pinned Hugo Extended binary on first run, then serves the
-site at http://localhost:1316.
+site at <http://localhost:1316>.
 
 If you already have Hugo installed, first download the theme (any of `serve.cs`, `build.sh`, or a
 manual extract of the [Geekdoc release tarball](https://github.com/thegeeklab/hugo-geekdoc/releases)
@@ -53,15 +53,13 @@ docs/
 │   └── production/
 │       └── hugo.toml         # Production overrides
 ├── content/          # Markdown content files
-│   ├── _index.md     # Home page
-│   └── docs/         # Documentation pages
-│       ├── _index.md              # Marketplace overview
-│       ├── getting-started/       # Installation and usage
-│       ├── dotnet/                # One section per plugin...
-│       ├── dotnet-testing/
-│       ├── testing/
-│       ├── architecture/
-│       └── workflow/
+│   ├── _index.md          # Documentation hub landing page
+│   ├── getting-started/   # Installation and usage
+│   ├── dotnet/            # One section per plugin...
+│   ├── dotnet-testing/
+│   ├── testing/
+│   ├── architecture/
+│   └── workflow/
 ├── layouts/          # Hugo template overrides (home page, a11y fixes)
 ├── static/           # Static files served at site root
 │   └── css/
@@ -83,7 +81,7 @@ this version of Geekdoc.
 
 Documentation pages summarize the plugins' skills, agents, and commands — they intentionally do
 **not** duplicate `SKILL.md` content. When a plugin gains or loses a skill, agent, or command,
-update the matching page under `content/docs/<plugin>/`.
+update the matching page under `content/<plugin>/`.
 
 Frontmatter for a new page:
 
