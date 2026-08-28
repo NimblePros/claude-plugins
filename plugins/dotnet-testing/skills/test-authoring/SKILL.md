@@ -1,7 +1,6 @@
 ---
 name: test-authoring
 description: Conventions for writing xUnit tests. Covers naming, assertion style (Shouldly), mocking (NSubstitute), fixture patterns, and the rules that make tests meaningful vs. ornamental. Load this skill before writing or reviewing any test file.
-invocable: true
 ---
 
 # Test Authoring Conventions

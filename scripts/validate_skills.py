@@ -27,11 +27,29 @@ from skills_ref import validator
 from skills_ref.errors import ParseError
 from skills_ref.parser import find_skill_md, parse_frontmatter
 
-# Frontmatter keys that Claude Code understands but the Agent Skills spec does
-# not define. Keeping them out of skills-ref's error list lets the rest of its
-# checks (required fields, name/directory match, description length) still gate
-# CI. Add to this list only for fields Claude Code actually documents.
-CLAUDE_CODE_FIELDS = {"invocable"}
+# Frontmatter keys that Claude Code documents as its own extensions to the Agent
+# Skills spec (https://code.claude.com/docs/en/skills, "Frontmatter reference").
+# Keeping them out of skills-ref's error list lets the rest of its checks
+# (required fields, name/directory match, description length) still gate CI.
+# Anything outside this set and the spec's six fields is either a typo or a key
+# Claude Code silently ignores at load time — both are worth failing on, so add
+# to this list only for fields the Claude Code docs actually define.
+CLAUDE_CODE_FIELDS = {
+    "when_to_use",
+    "argument-hint",
+    "arguments",
+    "disable-model-invocation",
+    "user-invocable",
+    "disallowed-tools",
+    "model",
+    "effort",
+    "context",
+    "agent",
+    "background",
+    "hooks",
+    "paths",
+    "shell",
+}
 
 SEARCH_ROOT = "plugins"
 

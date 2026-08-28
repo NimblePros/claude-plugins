@@ -1,7 +1,7 @@
 ---
 name: adr-writing
 description: Write Architecture Decision Records (ADRs) for a project's documentation. Covers file naming, frontmatter, required sections, status lifecycle, index maintenance, and detecting/fixing duplicate ADR numbers from parallel branches. Load before creating, revising, or superseding any ADR, or when asked to check for duplicate ADR numbers or fix the ADR list.
-invocable: false
+user-invocable: false
 ---
 
 # Writing Architecture Decision Records
