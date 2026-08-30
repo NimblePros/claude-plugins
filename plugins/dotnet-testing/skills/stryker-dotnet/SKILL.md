@@ -1,7 +1,6 @@
 ---
 name: stryker-dotnet
 description: Run Stryker.NET mutation testing against a specific .NET source file. Covers installation (local tool), scoped invocation, JSON output parsing, and interpreting killed/survived results to decide pass/fail.
-invocable: true
 ---
 
 # Stryker.NET Mutation Testing

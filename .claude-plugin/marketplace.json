@@ -33,16 +33,16 @@
       "category": "testing"
     },
     {
-      "name": "testing",
-      "source": "./plugins/testing",
-      "description": "Stack-neutral testing practice: end-to-end test authoring and Playwright-based issue reproduction reports",
+      "name": "playwright-testing",
+      "source": "./plugins/playwright-testing",
+      "description": "Playwright-focused testing: E2E test authoring, issue reproduction reports, and refactoring generated .NET Playwright tests",
       "author": {
         "name": "NimblePros"
       },
       "homepage": "https://github.com/NimblePros/claude-plugins",
       "repository": "https://github.com/NimblePros/claude-plugins",
       "license": "MIT",
-      "keywords": ["testing", "e2e", "playwright", "quality"],
+      "keywords": ["testing", "e2e", "playwright", "quality", "dotnet"],
       "category": "testing"
     },
     {
@@ -73,6 +73,7 @@
     }
   ],
   "renames": {
-    "nimblepros": null
+    "nimblepros": null,
+    "testing": "playwright-testing"
   }
 }

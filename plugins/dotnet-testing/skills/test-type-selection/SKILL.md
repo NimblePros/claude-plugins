@@ -1,7 +1,6 @@
 ---
 name: test-type-selection
 description: Decide which kind of test to write — unit, integration, or end-to-end (Playwright) — for a given behaviour. Prefer the cheapest test type that can actually observe the behaviour. Load this skill before choosing where and how to test a coverage gap.
-invocable: true
 ---
 
 # Test Type Selection

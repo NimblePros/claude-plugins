@@ -1,6 +1,6 @@
 ---
 description: Write an Architecture Decision Record (ADR) documenting a design or technology decision.
-argument-hint: "<decision-description>" [--issue <number>]
+argument-hint: '"<decision-description>" [--issue <number>]'
 allowed-tools: Bash(git *), Bash(gh *), Write, Edit, Read, Glob
 ---
 

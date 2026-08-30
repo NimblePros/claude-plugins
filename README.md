@@ -16,7 +16,7 @@ claude plugin install dotnet-testing@nimblepros
 |---|---|---|
 | [**dotnet**](plugins/dotnet/) | `claude plugin install dotnet@nimblepros` | C#/.NET practice: coding standards, package management, Options/DI patterns, OpenTelemetry, NuGet publishing |
 | [**dotnet-testing**](plugins/dotnet-testing/) | `claude plugin install dotnet-testing@nimblepros` | The `/dotnet-testing:add-coverage` pipeline, CRAP analysis, Stryker.NET mutation testing, xUnit conventions, Aspire integration testing |
-| [**testing**](plugins/testing/) | `claude plugin install testing@nimblepros` | Stack-neutral testing: end-to-end test authoring, Playwright issue-repro reports |
+| [**playwright-testing**](plugins/playwright-testing/) | `claude plugin install playwright-testing@nimblepros` | Playwright E2E test authoring, design review, issue-repro reports, and refactoring generated .NET Playwright tests |
 | [**architecture**](plugins/architecture/) | `claude plugin install architecture@nimblepros` | ADR writing and technical documentation |
 | [**workflow**](plugins/workflow/) | `claude plugin install workflow@nimblepros` | Issue → spec → implementation → review → PR, over the `gh` CLI |
 
@@ -130,13 +130,16 @@ recorded in
 │   │   ├── commands/
 │   │   ├── agents/
 │   │   └── skills/
-│   ├── testing/
+│   ├── playwright-testing/
 │   ├── architecture/
 │   └── workflow/
 ├── devdocs/
 │   └── ADRs/                     # architecture decision records
 ├── scripts/
-│   └── ValidateMarketplace.cs    # structural validation (dotnet run scripts/ValidateMarketplace.cs)
+│   ├── ValidateMarketplace.cs    # structural validation (dotnet run scripts/ValidateMarketplace.cs)
+│   └── validate_skills.py        # Agent Skills spec validation (needs skills-ref)
+├── .github/workflows/
+│   └── validate.yml              # runs every validator on push and PR
 └── README.md
 ```
 
@@ -151,11 +154,27 @@ recorded in
   loading what they don't need.
 - Structural decisions get an ADR in [`devdocs/ADRs/`](devdocs/ADRs/).
 
-Before opening a PR, run both validators:
+### Validation
+
+[`.github/workflows/validate.yml`](.github/workflows/validate.yml) runs every validator below on
+each push and pull request. To get the same answer before opening a PR:
 
 ```bash
-dotnet run scripts/ValidateMarketplace.cs   # repository structure (needs the .NET 10 SDK)
-claude plugin validate .                    # manifest schema
+claude plugin validate . --strict                      # marketplace manifest schema
+for p in plugins/*/; do claude plugin validate "$p" --strict; done
+python scripts/validate_skills.py                      # every SKILL.md vs. the Agent Skills spec
+dotnet run scripts/ValidateMarketplace.cs              # repository structure (needs the .NET 10 SDK)
+```
+
+Each covers a different layer: `claude plugin validate` checks manifest and frontmatter schema
+against the Claude Code runtime, `validate_skills.py` checks skills against the portable
+[Agent Skills spec](https://github.com/agentskills/agentskills), and `ValidateMarketplace.cs`
+checks that the catalog, the manifests, and the on-disk layout agree.
+
+`validate_skills.py` needs the reference validator, which is not on PyPI:
+
+```bash
+pip install "git+https://github.com/agentskills/agentskills.git#subdirectory=skills-ref"
 ```
 
 `ValidateMarketplace.cs` is a file-based app — no project file, no restore, just run it.
