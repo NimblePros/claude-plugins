@@ -19,6 +19,7 @@ claude plugin install dotnet-testing@nimblepros
 | [**playwright-testing**](plugins/playwright-testing/) | `claude plugin install playwright-testing@nimblepros` | Playwright E2E test authoring, design review, issue-repro reports, and refactoring generated .NET Playwright tests |
 | [**architecture**](plugins/architecture/) | `claude plugin install architecture@nimblepros` | ADR writing and technical documentation |
 | [**workflow**](plugins/workflow/) | `claude plugin install workflow@nimblepros` | Issue → spec → implementation → review → PR, over the `gh` CLI |
+| [**presenting**](plugins/presenting/) | `claude plugin install presenting@nimblepros` | Resources for slide decks, demos, videos, and conference-talk delivery |
 
 Each plugin's README documents its skills, agents, commands, and requirements.
 
@@ -132,6 +133,7 @@ recorded in
 │   │   └── skills/
 │   ├── playwright-testing/
 │   ├── architecture/
+│   ├── presenting/
 │   └── workflow/
 ├── devdocs/
 │   └── ADRs/                     # architecture decision records

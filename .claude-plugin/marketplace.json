@@ -70,6 +70,19 @@
       "license": "MIT",
       "keywords": ["github", "workflow", "code-review", "pull-request", "git"],
       "category": "productivity"
+    },
+    {
+      "name": "presenting",
+      "source": "./plugins/presenting",
+      "description": "Resources and guidance for creating effective multimedia presentations: slide decks, demos, screencasts, and talk delivery",
+      "author": {
+        "name": "NimblePros"
+      },
+      "homepage": "https://github.com/NimblePros/claude-plugins",
+      "repository": "https://github.com/NimblePros/claude-plugins",
+      "license": "MIT",
+      "keywords": ["presentations", "slides", "demos", "videos", "speaking"],
+      "category": "productivity"
     }
   ],
   "renames": {
