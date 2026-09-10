@@ -15,7 +15,7 @@ how to install only the parts you want.
 
 [NimblePros/claude-plugins](https://github.com/NimblePros/claude-plugins) is a
 [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugins): a single repository you
-add once, after which you can install any of its five plugins independently. Each plugin bundles
+add once, after which you can install any of its six plugins independently. Each plugin bundles
 related **skills** (reference knowledge Claude loads on demand), **agents** (specialized
 subagents for focused tasks), and — where it makes sense — **commands** (slash commands that
 orchestrate multi-step pipelines).
@@ -25,7 +25,7 @@ claude plugin marketplace add NimblePros/claude-plugins
 claude plugin install dotnet-testing@nimblepros
 ```
 
-## The five plugins
+## The six plugins
 
 | Plugin | What you get |
 | --- | --- |
@@ -34,6 +34,7 @@ claude plugin install dotnet-testing@nimblepros
 | [**testing**]({{< ref "/testing" >}}) | Stack-neutral testing: end-to-end test authoring, Playwright issue-repro reports |
 | [**architecture**]({{< ref "/architecture" >}}) | ADR writing and technical documentation |
 | [**workflow**]({{< ref "/workflow" >}}) | Issue → spec → implementation → review → PR, over the `gh` CLI |
+| [**presenting**]({{< ref "/presenting" >}}) | Technical presentations: planning, storytelling, humor, code/diagram visuals, live demos, CFP abstracts, and reveal.js decks |
 
 ## How the plugins are organized
 
@@ -57,5 +58,5 @@ The rationale for this structure is recorded in
   migration from the old single plugin
 - **[dotnet]({{< ref "/dotnet" >}})**, **[dotnet-testing]({{< ref "/dotnet-testing" >}})**,
   **[testing]({{< ref "/testing" >}})**, **[architecture]({{< ref "/architecture" >}})**,
-  **[workflow]({{< ref "/workflow" >}})** — one section per plugin, with a summary page per
+  **[workflow]({{< ref "/workflow" >}})**, **[presenting]({{< ref "/presenting" >}})** — one section per plugin, with a summary page per
   skill
