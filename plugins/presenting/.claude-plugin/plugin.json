@@ -1,0 +1,12 @@
+{
+  "name": "presenting",
+  "description": "Resources and guidance for creating effective multimedia presentations: slide decks, demos, screencasts, and talk delivery",
+  "version": "1.0.0",
+  "author": {
+    "name": "NimblePros"
+  },
+  "homepage": "https://github.com/NimblePros/claude-plugins",
+  "repository": "https://github.com/NimblePros/claude-plugins",
+  "license": "MIT",
+  "keywords": ["presentations", "slides", "demos", "videos", "speaking"]
+}
