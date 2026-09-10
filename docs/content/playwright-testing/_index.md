@@ -1,16 +1,19 @@
 ---
-title: "testing"
-description: "Stack-neutral testing practice: end-to-end test authoring, Playwright-based issue reproduction, and design-vs-implementation review"
-summary: "Three commands, two skills, and one agent for Playwright-based testing and QA"
+title: "playwright-testing"
+description: "Playwright-focused testing: E2E test authoring, issue reproduction reports, design-vs-implementation review, and refactoring generated .NET Playwright tests"
+summary: "Three commands, three skills, and one agent for Playwright-based testing and QA"
 date: 2026-08-13
 weight: 50
+aliases: ["/testing/"]
 ---
 
 Playwright-focused testing practice. Most content is stack-neutral; the
-[`/playwright-testing:refactor-tests`]({{< ref "refactor-tests" >}}) command is .NET-specific.
+[playwright-dotnet-refactor]({{< ref "playwright-dotnet-refactor" >}}) skill and the
+[`/playwright-testing:refactor-tests`]({{< ref "refactor-tests" >}}) command that applies it are
+.NET-specific.
 
 ```bash
-claude plugin install testing@nimblepros
+claude plugin install playwright-testing@nimblepros
 ```
 
 ## Commands
@@ -27,6 +30,7 @@ claude plugin install testing@nimblepros
 |---|---|
 | [playwright-issue-repro-report]({{< ref "playwright-issue-repro-report" >}}) | Turn a GitHub bug report into a Playwright repro with screenshot/video/trace evidence and a structured issue comment |
 | [playwright-design-review]({{< ref "playwright-design-review" >}}) | Compare a design asset (image or PDF) against live Playwright screenshots, classify differences by severity, and optionally create GitHub issues per finding |
+| [playwright-dotnet-refactor]({{< ref "playwright-dotnet-refactor" >}}) | Clean Playwright .NET codegen drafts into readable xUnit tests with role-based locators and intent-based assertions |
 
 ## Agents
 
@@ -48,7 +52,4 @@ against design assets.
 
 If your stack is .NET, install [dotnet-testing]({{< ref "/dotnet-testing" >}}) as well — it
 carries the xUnit conventions, coverage analysis, and mutation testing that this plugin
-deliberately leaves out. Its [playwright-dotnet-refactor]({{< ref "/dotnet-testing/playwright-dotnet-refactor" >}})
-skill is the .NET-specific complement to the Playwright practice here; the
-[`/playwright-testing:refactor-tests`]({{< ref "refactor-tests" >}}) command in this plugin
-applies that skill in batch over a file or glob.
+deliberately leaves out.

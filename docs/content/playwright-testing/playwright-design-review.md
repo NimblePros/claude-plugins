@@ -4,6 +4,7 @@ description: "Compare a design asset against live Playwright screenshots and pro
 summary: "From mockup to implementation gap list, with optional GitHub issue creation"
 date: 2026-08-14
 weight: 20
+aliases: ["/testing/playwright-design-review/"]
 ---
 
 > Compare a design asset (image or PDF) against live screenshots of the implementation captured

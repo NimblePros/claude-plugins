@@ -4,6 +4,7 @@ description: "Upgrade Playwright .NET test files to semantic locators and intent
 summary: "Batch-refactor codegen noise into maintainable xUnit tests"
 date: 2026-08-14
 weight: 40
+aliases: ["/testing/refactor-tests/"]
 ---
 
 > Refactor generated or messy Playwright .NET test files into clean, maintainable xUnit tests
@@ -36,7 +37,7 @@ weight: 40
 
 ## What it leans on
 
-Built on the [`playwright-dotnet-refactor`]({{< ref "/dotnet-testing/playwright-dotnet-refactor" >}})
+Built on the [`playwright-dotnet-refactor`]({{< ref "playwright-dotnet-refactor" >}})
 skill. That skill defines the rules, the output contract, and the rationale format. This command
 applies them in batch over a file or glob, wraps the run with a green-gate, and surfaces a
 summary rather than inline reasoning.

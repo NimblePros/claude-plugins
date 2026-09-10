@@ -57,7 +57,7 @@ docs/
 │   ├── getting-started/   # Installation and usage
 │   ├── dotnet/            # One section per plugin...
 │   ├── dotnet-testing/
-│   ├── testing/
+│   ├── playwright-testing/
 │   ├── architecture/
 │   └── workflow/
 ├── layouts/          # Hugo template overrides (home page, a11y fixes)
