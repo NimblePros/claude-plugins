@@ -31,7 +31,7 @@ claude plugin install dotnet-testing@nimblepros
 | --- | --- |
 | [**dotnet**]({{< ref "/dotnet" >}}) | C#/.NET practice: coding standards, package management, Options/DI patterns, OpenTelemetry, NuGet publishing |
 | [**dotnet-testing**]({{< ref "/dotnet-testing" >}}) | The `/dotnet-testing:add-coverage` pipeline, CRAP analysis, Stryker.NET mutation testing, xUnit conventions, Aspire integration testing |
-| [**testing**]({{< ref "/testing" >}}) | Stack-neutral testing: end-to-end test authoring, Playwright issue-repro reports |
+| [**playwright-testing**]({{< ref "/playwright-testing" >}}) | Playwright E2E test authoring, design review, issue-repro reports, and refactoring generated .NET Playwright tests |
 | [**architecture**]({{< ref "/architecture" >}}) | ADR writing and technical documentation |
 | [**workflow**]({{< ref "/workflow" >}}) | Issue → spec → implementation → review → PR, over the `gh` CLI |
 | [**presenting**]({{< ref "/presenting" >}}) | Technical presentations: planning, storytelling, humor, code/diagram visuals, live demos, CFP abstracts, and reveal.js decks |
@@ -42,10 +42,11 @@ Content is grouped by **capability**, not by artifact type — skills, agents, a
 work together ship together. Two principles shape the split:
 
 - **Language-specific vs. stack-neutral.** The `dotnet` and `dotnet-testing` plugins assume the
-  .NET toolchain; `testing`, `architecture`, and `workflow` do not. That is why testing exists
-  twice: [`dotnet-testing`]({{< ref "/dotnet-testing" >}}) carries everything that depends on
-  `dotnet test`, xUnit, and Stryker.NET, while [`testing`]({{< ref "/testing" >}}) carries
-  Playwright/e2e practice that works on any stack.
+  .NET toolchain; `architecture` and `workflow` do not. That is why testing exists twice:
+  [`dotnet-testing`]({{< ref "/dotnet-testing" >}}) carries everything that depends on
+  `dotnet test`, xUnit, and Stryker.NET, while
+  [`playwright-testing`]({{< ref "/playwright-testing" >}}) carries Playwright/e2e practice that
+  mostly works on any stack (its test-refactoring skill and command target .NET Playwright tests).
 - **Self-contained plugins.** A skill ships in the same plugin as any agent or command that loads
   it. No plugin depends on another being installed.
 
@@ -57,6 +58,6 @@ The rationale for this structure is recorded in
 - **[Getting Started]({{< ref "/getting-started" >}})** — install options, namespacing, and
   migration from the old single plugin
 - **[dotnet]({{< ref "/dotnet" >}})**, **[dotnet-testing]({{< ref "/dotnet-testing" >}})**,
-  **[testing]({{< ref "/testing" >}})**, **[architecture]({{< ref "/architecture" >}})**,
+  **[playwright-testing]({{< ref "/playwright-testing" >}})**, **[architecture]({{< ref "/architecture" >}})**,
   **[workflow]({{< ref "/workflow" >}})**, **[presenting]({{< ref "/presenting" >}})** — one section per plugin, with a summary page per
   skill

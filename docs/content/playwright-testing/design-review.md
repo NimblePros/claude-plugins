@@ -4,6 +4,7 @@ description: "Capture Playwright screenshots, diff them against a design asset, 
 summary: "Full design-QA pipeline from asset to report, with optional GitHub issue creation"
 date: 2026-08-14
 weight: 50
+aliases: ["/testing/design-review/"]
 ---
 
 > Compare a design asset (image or PDF) against live Playwright screenshots, produce a

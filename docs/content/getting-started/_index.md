@@ -17,7 +17,7 @@ claude plugin install <plugin>@nimblepros
 
 This installs that plugin's commands, agents, and skills into your global Claude Code
 configuration so they are available in every project. Available plugin names: `dotnet`,
-`dotnet-testing`, `testing`, `architecture`, `workflow`, `presenting`.
+`dotnet-testing`, `playwright-testing`, `architecture`, `workflow`, `presenting`.
 
 ## Option B — Per-project install via `.claude/settings.json`
 

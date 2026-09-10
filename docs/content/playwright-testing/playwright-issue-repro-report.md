@@ -4,6 +4,7 @@ description: "Reproduce GitHub issues with Playwright and publish evidence-based
 summary: "From narrative bug report to deterministic repro with artifacts"
 date: 2026-08-13
 weight: 10
+aliases: ["/testing/playwright-issue-repro-report/"]
 ---
 
 > Reproduce GitHub issues with Playwright, collect screenshot/video/trace artifacts, and publish

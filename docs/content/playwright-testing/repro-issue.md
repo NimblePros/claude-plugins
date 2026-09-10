@@ -4,6 +4,7 @@ description: "Reproduce a GitHub issue with Playwright, capture evidence artifac
 summary: "From issue number to posted evidence comment in four automated phases"
 date: 2026-08-14
 weight: 30
+aliases: ["/testing/repro-issue/"]
 ---
 
 > Reproduce a GitHub issue with Playwright, collect screenshot/video/trace artifacts, and publish

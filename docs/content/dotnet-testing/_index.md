@@ -1,7 +1,7 @@
 ---
 title: "dotnet-testing"
 description: ".NET testing toolkit: the /add-coverage pipeline, CRAP analysis, mutation testing, xUnit conventions, and Aspire integration testing"
-summary: "A command, four agents, and six skills built around finding and closing the riskiest coverage gap"
+summary: "Three commands, four agents, and five skills built around finding and closing the riskiest coverage gap"
 date: 2026-08-13
 weight: 40
 ---
@@ -14,8 +14,8 @@ claude plugin install dotnet-testing@nimblepros
 ```
 
 This plugin is deliberately .NET-specific — it depends on `dotnet test`, ReportGenerator,
-Stryker.NET, xUnit, Shouldly, and NSubstitute. For stack-neutral testing practice, see the
-[testing]({{< ref "/testing" >}}) plugin.
+Stryker.NET, xUnit, Shouldly, and NSubstitute. For Playwright end-to-end testing practice, see the
+[playwright-testing]({{< ref "/playwright-testing" >}}) plugin.
 
 ## Commands
 
@@ -34,7 +34,6 @@ Stryker.NET, xUnit, Shouldly, and NSubstitute. For stack-neutral testing practic
 | [test-type-selection]({{< ref "test-type-selection" >}}) | The unit → integration → e2e ladder: cheapest type that can observe the behaviour |
 | [stryker-dotnet]({{< ref "stryker-dotnet" >}}) | Scoped Stryker.NET runs and killed/survived interpretation |
 | [aspire-integration-testing]({{< ref "aspire-integration-testing" >}}) | Integration tests with .NET Aspire fixtures and real dependencies |
-| [playwright-dotnet-refactor]({{< ref "playwright-dotnet-refactor" >}}) | Cleaning Playwright codegen drafts into readable xUnit tests |
 
 ## Agents
 
