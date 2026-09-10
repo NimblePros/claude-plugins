@@ -1,6 +1,6 @@
 ---
 name: multimedia-presentations
-description: Plan and refine multimedia presentations such as slide decks, demos, recorded videos, and conference talks, with practical guidance on structure, visuals, rehearsal, and delivery.
+description: Plan and refine multimedia presentations such as slide decks, demos, recorded videos, and conference talks, with practical guidance on structure, visuals, rehearsal, and delivery. Use when starting, restructuring, or reviewing a talk, webinar, demo, or screencast.
 user-invocable: false
 ---
 
@@ -19,6 +19,21 @@ Use this skill when:
 ## Reference Files
 
 - [presentation-patterns.md](presentation-patterns.md): Planning frameworks, pacing guidance, and structure patterns for talks, demos, and videos
+
+## Related Skills
+
+This skill is the entry point for planning. The other skills in this plugin go deeper on one part each:
+
+| Need | Skill |
+|------|-------|
+| A narrative arc and an opening hook | `storytelling` |
+| Code, diagrams, terminal output, or charts on slides | `technical-visuals` |
+| A live coding or product demo | `live-demos` |
+| Humor and lighter moments | `comedic-speaking` |
+| Building the deck in reveal.js | `revealjs` |
+| A CFP submission or session description | `talk-abstracts` |
+
+To have a complete reveal.js deck built from a brief, use the `presentation-deck-creator` agent.
 
 ## Core Principles
 

@@ -1,12 +1,12 @@
 {
   "name": "presenting",
-  "description": "Resources and guidance for creating effective multimedia presentations: slide decks, demos, screencasts, and talk delivery",
-  "version": "1.0.0",
+  "description": "Technical presentations end to end: planning, storytelling, humor, code and diagram visuals, live demos, CFP abstracts, and reveal.js slide decks",
+  "version": "1.1.0",
   "author": {
     "name": "NimblePros"
   },
   "homepage": "https://github.com/NimblePros/claude-plugins",
   "repository": "https://github.com/NimblePros/claude-plugins",
   "license": "MIT",
-  "keywords": ["presentations", "slides", "demos", "videos", "speaking"]
+  "keywords": ["presentations", "slides", "demos", "speaking", "revealjs", "storytelling"]
 }

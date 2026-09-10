@@ -1,7 +1,7 @@
 {
   "$schema": "https://code.claude.com/schemas/marketplace.json",
   "name": "nimblepros",
-  "description": "NimblePros Claude Code plugins for .NET, architecture, testing, and development workflow.",
+  "description": "NimblePros Claude Code plugins for .NET, architecture, testing, development workflow, and technical presenting.",
   "owner": {
     "name": "NimblePros"
   },
@@ -74,14 +74,14 @@
     {
       "name": "presenting",
       "source": "./plugins/presenting",
-      "description": "Resources and guidance for creating effective multimedia presentations: slide decks, demos, screencasts, and talk delivery",
+      "description": "Technical presentations end to end: planning, storytelling, humor, code and diagram visuals, live demos, CFP abstracts, and reveal.js slide decks",
       "author": {
         "name": "NimblePros"
       },
       "homepage": "https://github.com/NimblePros/claude-plugins",
       "repository": "https://github.com/NimblePros/claude-plugins",
       "license": "MIT",
-      "keywords": ["presentations", "slides", "demos", "videos", "speaking"],
+      "keywords": ["presentations", "slides", "demos", "speaking", "revealjs", "storytelling"],
       "category": "productivity"
     }
   ],
