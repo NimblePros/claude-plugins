@@ -1,6 +1,6 @@
 ---
 name: issue-agent
-description: Interacts with GitHub issues using the gh CLI. Use for reading backlog items, breaking issues into subtasks, and updating GitHub issues with checklists.
+description: Interacts with GitHub issues using the gh CLI. Use for reading backlog items, breaking issues into subtasks or native sub-issues, and updating GitHub issues with checklists.
 tools: [execute, read, edit, search, web, agent, todo]
 ---
 
@@ -31,6 +31,16 @@ You are the issue-agent. Your role is to manage GitHub issues using the `gh` CLI
 
 ## Sub-Issues
 
-- If asked to create sub-issues, use `gh issue create` to generate new issues and link them back to the parent issue
-- When creating sub-issues, include a reference to the parent issue in the body (e.g., "Part of #123")
-- Update the parent issue checklist to reference the new sub-issue (e.g., `- [ ] Subtask description (#456)`)
+Prefer GitHub's native sub-issues over checklists when breaking up an issue that is too big for one pull request. Only create issues the user has approved.
+
+- Create each sub-issue with `gh issue create`, and end its body with "Part of #<parent>"
+- Link it to the parent as a native sub-issue. The API takes the issue's internal id, not its number:
+
+  ```bash
+  id=$(gh api repos/{owner}/{repo}/issues/<child-number> --jq .id)
+  gh api -X POST repos/{owner}/{repo}/issues/<parent>/sub_issues -F sub_issue_id="$id"
+  ```
+
+- Link sub-issues in priority order. GitHub keeps that order, and `implement-feature` picks the first eligible one.
+- Record dependencies between sub-issues as "Blocked by #NNN" in the body
+- To list an issue's existing sub-issues: `gh api repos/{owner}/{repo}/issues/<number>/sub_issues --jq '.[] | "#\(.number) \(.state) \(.title)"'`
