@@ -1,0 +1,21 @@
+query ($owner: String!, $repo: String!, $number: Int!) {
+  repository(owner: $owner, name: $repo) {
+    issue(number: $number) {
+      number
+      title
+      state
+      labels(first: 20) { nodes { name } }
+      parent { number title state }
+      subIssuesSummary { total completed percentCompleted }
+      subIssues(first: 50) {
+        nodes {
+          number
+          title
+          state
+          assignees(first: 5) { nodes { login } }
+          blockedBy(first: 10) { nodes { number state } }
+        }
+      }
+    }
+  }
+}

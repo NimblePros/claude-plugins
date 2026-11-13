@@ -7,30 +7,41 @@ weight: 20
 ---
 
 > End-to-end workflow for implementing, fixing, or otherwise working on a specific GitHub issue.
-> Fetches full issue context with the gh CLI, produces a phased implementation plan in
-> .claude/plans, implements it, gets an independent agent review, verifies build/tests/format,
-> and opens a pull request that references the issue. Use whenever asked to implement, fix, or
-> work on a GitHub issue by number or URL.
+> Fetches full issue context with the gh CLI, triages scope (pivoting to an open sub-issue, or
+> proposing a split when an issue is epic-sized), produces a phased implementation plan,
+> implements it, gets an independent agent review, verifies build/tests/format, and opens a pull
+> request that references the issue.
 
 Invoke with `/workflow:implement <issue-number-or-url>`.
 
 ## What it covers
 
-The plugin's flagship seven-step loop:
+The plugin's flagship loop:
 
-1. **Gather context exhaustively** — `gh issue view` with all fields, read *every* comment,
-   download referenced screenshots and attachments (they "frequently contain the actual
-   acceptance criteria"), follow every linked issue and PR.
-2. **Plan before code** — persist a phased plan at `.claude/plans/YYYY-MM-DD-issue-NNN-slug.md`
-   before writing anything. Resuming an issue that already has a plan skips straight to
-   implementation.
-3. **Implement on a feature branch** — never `main`; write the tests the plan calls for.
-4. **Independent review** — launch a separate review agent with fresh context and address all
-   significant findings.
-5. **Final verification** — build, tests, formatting all clean.
-6. **Open the PR** — `gh pr create` with `Fixes #NNN` / `Closes #NNN` (or `Relates to #NNN` for
-   partial work).
-7. **Summarize** — plan path, branch, PR URL, and any deferred work.
+1. **Gather context exhaustively**: `gh issue view` with all fields, *every* comment, referenced
+   screenshots and attachments (they often contain the real acceptance criteria), and every
+   linked issue and PR. A GraphQL query also fetches the issue's parent and sub-issues.
+2. **Triage scope**: before claiming anything, decide which issue to implement.
+   - **Open sub-issues**: pivot to the first eligible one (open, unassigned or yours, and not
+     blocked), and restart the workflow on it. The PR then says `Fixes #child` and
+     `Relates to #parent`.
+   - **Too big for one PR**: stop before branching and propose a split, with titles, scope,
+     acceptance criteria, and order. After you approve, it creates the sub-issues, links them
+     to the parent natively, and starts on the first.
+   - **Fits**: carry on.
+3. **Claim**: self-assign, comment with the plan path, and add the `agent-assigned` label.
+4. **Plan before code**: persist a phased plan at
+   `<plansDir>/YYYY-MM-DD-issue-NNN-slug.md` before writing anything. Resuming an issue that
+   already has a plan skips straight to implementation.
+5. **Implement, review, verify**: work on a feature branch (never `main`) and write the tests
+   the plan calls for. A separate review agent with fresh context checks the change, and all
+   significant findings get addressed. Build, tests, and formatting must be clean.
+6. **Open the PR and summarize**: `gh pr create` with `Fixes #NNN`, then a chat summary that
+   includes the triage outcome.
+
+The skill uses progressive disclosure. `SKILL.md` holds only the step list and guardrails, and
+the agent reads each step's file under `references/` when it reaches that step. A triage-only
+run, such as "is #42 ready to work on?", never loads the implementation details.
 
 Its guardrails are worth quoting: "Never skip, weaken, or disable tests to get to green" and
 "Report failures honestly."

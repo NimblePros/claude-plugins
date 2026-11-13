@@ -1,5 +1,5 @@
 ---
-description: "Implement a GitHub issue end-to-end: fetch context, plan, implement, review, and open a PR."
+description: "Implement a GitHub issue end-to-end: fetch context, triage scope, plan, implement, review, and open a PR."
 argument-hint: <issue-number-or-url>
 allowed-tools: Bash(dotnet *), Bash(git *), Bash(gh *), Write, Edit, Read, Glob
 ---
@@ -7,11 +7,16 @@ allowed-tools: Bash(dotnet *), Bash(git *), Bash(gh *), Write, Edit, Read, Glob
 <objective>
 Execute the `implement-feature` skill for the GitHub issue identified by `$ARGUMENTS`:
 
-1. Fetch full issue context including comments and attachments.
-2. Create a phased implementation plan in `.claude/plans/`.
-3. Implement, test, and independently review the changes.
-4. Verify build, tests, and formatting are clean.
-5. Open a pull request that closes the issue.
+1. Fetch full issue context, including comments, attachments, the parent issue, and sub-issues.
+2. Triage scope. If the issue has open sub-issues, pivot to the first eligible one. If it is
+   too big for one PR, stop and propose a split.
+3. Create a phased implementation plan in the plan directory.
+4. Implement, test, and independently review the changes.
+5. Verify build, tests, and formatting are clean.
+6. Open a pull request that closes the issue.
+
+The issue you implement may differ from `$ARGUMENTS`. A run may also end at step 2 with a
+split proposal instead of a pull request.
 
 `$ARGUMENTS` must be an issue number (e.g. `42`) or a full GitHub issue URL.
 </objective>
@@ -37,7 +42,7 @@ If `$ARGUMENTS` is empty, print usage and stop.
 
 ---
 
-## Phases 1–5
+## Phases 1–6
 
 Follow the `implement-feature` skill.
 

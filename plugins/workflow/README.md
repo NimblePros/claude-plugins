@@ -12,7 +12,7 @@ claude plugin install workflow@nimblepros
 | Skill | Invoke | What it covers |
 |---|---|---|
 | `feature-specification` | — | Generates a structured feature specification from a GitHub issue. |
-| `implement-feature` | — | End-to-end workflow for an issue: gather full context, persist a phased plan, implement, get an independent agent review, verify, open a PR. |
+| `implement-feature` | — | End-to-end workflow for an issue: gather full context, triage scope (pivot to an open sub-issue or propose splitting an epic-sized issue), persist a phased plan, implement, get an independent agent review, verify, open a PR. |
 | `commit` | `/workflow:commit` | Generates a commit message following project conventions. |
 | `conventional-commit` | — | Conventional Commits message and PR title format. |
 | `pr` | `/workflow:pr` | Full PR lifecycle from investigation through deployment verification. |
