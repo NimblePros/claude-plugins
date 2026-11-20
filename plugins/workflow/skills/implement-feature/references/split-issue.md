@@ -30,7 +30,13 @@ Link them in the approved order, because that order sets the sub-issue priority 
 If one sub-issue must wait for another, add "Blocked by #NNN" to its body. That way a later
 triage can see the dependency.
 
-## 4. Report and continue
+## 4. Apply labels
+
+Review labels available and how they're used with other recent issues. Apply labels to new
+issues if you're quite certain they apply. For security issues, always apply a `security`
+label (create one if necessary) unless local project guidance dictates otherwise.
+
+## 5. Report and continue
 
 List the created issues with their URLs, then restart at step 1 ([context.md](context.md))
 with the first sub-issue.

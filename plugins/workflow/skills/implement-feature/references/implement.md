@@ -18,7 +18,7 @@
 - The review must also scan for **security vulnerabilities**, **performance
   regressions**, and **accessibility issues**.
 - Address **all significant findings**. For any finding you deliberately leave, record the
-  reasoning in the plan file.
+  reasoning in the plan file, and if it's significant, **open a new issue**.
 
 ## Final verification
 

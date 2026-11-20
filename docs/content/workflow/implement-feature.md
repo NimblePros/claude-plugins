@@ -22,7 +22,7 @@ The plugin's flagship loop:
    screenshots and attachments (they often contain the real acceptance criteria), and every
    linked issue and PR. A GraphQL query also fetches the issue's parent and sub-issues.
 2. **Triage scope**: before claiming anything, decide which issue to implement.
-   - **Open sub-issues**: pivot to the first eligible one (open, unassigned or yours, and not
+   - **Open sub-issues**: pivot to the first eligible one (open, unassigned, and not
      blocked), and restart the workflow on it. The PR then says `Fixes #child` and
      `Relates to #parent`.
    - **Too big for one PR**: stop before branching and propose a split, with titles, scope,
