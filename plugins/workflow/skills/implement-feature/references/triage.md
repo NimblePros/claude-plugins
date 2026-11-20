@@ -17,8 +17,8 @@ Use `subIssuesSummary` and `subIssues` from step 1.
 | Open sub-issues exist, but none is eligible | **Stop.** Report each open sub-issue and what blocks it (an assignee, or an open `blockedBy` issue). Do not fall back to implementing the parent. |
 | All sub-issues are closed | Compare the parent's acceptance criteria with what the sub-issues delivered. If nothing remains, tell the user the parent looks ready to close and stop. Otherwise, continue with section B, scoped to the remaining work only. |
 
-A sub-issue is **eligible** when it is open, unassigned or assigned to you, and has no open
-`blockedBy` issues.
+A sub-issue is **eligible** when it is open, unassigned, and has no open `blockedBy` issues.
+An assignee, even you, means another agent may already be working on it, so skip it.
 
 After a pivot, the pull request closes the sub-issue (`Fixes #child`) and references the
 parent (`Relates to #parent`).
