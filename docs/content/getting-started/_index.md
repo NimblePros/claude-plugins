@@ -17,7 +17,7 @@ claude plugin install <plugin>@nimblepros
 
 This installs that plugin's commands, agents, and skills into your global Claude Code
 configuration so they are available in every project. Available plugin names: `dotnet`,
-`dotnet-testing`, `playwright-testing`, `architecture`, `workflow`, `presenting`.
+`dotnet-testing`, `playwright-testing`, `architecture`, `workflow`, `presenting`, `security`.
 
 ## Option B — Per-project install via `.claude/settings.json`
 
@@ -76,7 +76,7 @@ When installed via Option C (standalone copy into `.claude/`), use the short for
 Requirements vary per plugin — each plugin page lists its own. In general:
 
 - `git` and `gh` (GitHub CLI, authenticated via `gh auth login`) for
-  [workflow]({{< ref "/workflow" >}}) and the
+  [workflow]({{< ref "/workflow" >}}), [security]({{< ref "/security" >}}) and the
   [`/dotnet-testing:add-coverage`]({{< ref "/dotnet-testing/add-coverage" >}}) pipeline
 - the .NET SDK plus test tooling for [dotnet-testing]({{< ref "/dotnet-testing" >}})
 - nothing beyond Claude Code itself for the knowledge-only skills
