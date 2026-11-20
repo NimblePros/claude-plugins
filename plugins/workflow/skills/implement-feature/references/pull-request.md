@@ -20,4 +20,4 @@ End with a summary in chat covering:
   and why.
 - The plan file path, the branch name, and the PR URL.
 - The test coverage added, and the verification results (build, tests, format).
-- Review findings addressed, assumptions made, and any follow-up work deferred.
+- Review findings addressed, assumptions made, and any follow-up work deferred (with issue numbers if significant).

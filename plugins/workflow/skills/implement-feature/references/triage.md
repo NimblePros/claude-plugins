@@ -1,7 +1,8 @@
 # Step 2 — Triage scope
 
 Decide which issue you will actually implement, and whether it fits in one pull request.
-Nothing has been claimed yet, so changing course here costs nothing.
+Nothing has been claimed yet, so changing course here costs nothing. Only unassigned open
+issues should be considered at this step unless the user specifies otherwise.
 
 If the user explicitly asked you to implement the whole issue regardless of sub-issues or
 size, note that in the plan and go to [claim.md](claim.md).
