@@ -15,7 +15,7 @@ how to install only the parts you want.
 
 [NimblePros/claude-plugins](https://github.com/NimblePros/claude-plugins) is a
 [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugins): a single repository you
-add once, after which you can install any of its six plugins independently. Each plugin bundles
+add once, after which you can install any of its seven plugins independently. Each plugin bundles
 related **skills** (reference knowledge Claude loads on demand), **agents** (specialized
 subagents for focused tasks), and — where it makes sense — **commands** (slash commands that
 orchestrate multi-step pipelines).
@@ -25,7 +25,7 @@ claude plugin marketplace add NimblePros/claude-plugins
 claude plugin install dotnet-testing@nimblepros
 ```
 
-## The six plugins
+## The seven plugins
 
 | Plugin | What you get |
 | --- | --- |
@@ -35,6 +35,7 @@ claude plugin install dotnet-testing@nimblepros
 | [**architecture**]({{< ref "/architecture" >}}) | ADR writing and technical documentation |
 | [**workflow**]({{< ref "/workflow" >}}) | Issue → spec → implementation → review → PR, over the `gh` CLI |
 | [**presenting**]({{< ref "/presenting" >}}) | Technical presentations: planning, storytelling, humor, code/diagram visuals, live demos, CFP abstracts, and reveal.js decks |
+| [**security**]({{< ref "/security" >}}) | `/security:audit`: a time-boxed, whole-codebase security review filed as a GitHub epic with severity-labeled sub-issues |
 
 ## How the plugins are organized
 
@@ -59,5 +60,5 @@ The rationale for this structure is recorded in
   migration from the old single plugin
 - **[dotnet]({{< ref "/dotnet" >}})**, **[dotnet-testing]({{< ref "/dotnet-testing" >}})**,
   **[playwright-testing]({{< ref "/playwright-testing" >}})**, **[architecture]({{< ref "/architecture" >}})**,
-  **[workflow]({{< ref "/workflow" >}})**, **[presenting]({{< ref "/presenting" >}})** — one section per plugin, with a summary page per
+  **[workflow]({{< ref "/workflow" >}})**, **[presenting]({{< ref "/presenting" >}})**, **[security]({{< ref "/security" >}})** — one section per plugin, with a summary page per
   skill

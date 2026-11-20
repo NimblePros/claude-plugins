@@ -83,6 +83,19 @@
       "license": "MIT",
       "keywords": ["presentations", "slides", "demos", "speaking", "revealjs", "storytelling"],
       "category": "productivity"
+    },
+    {
+      "name": "security",
+      "source": "./plugins/security",
+      "description": "Time-boxed whole-codebase security audits: parallel focus-area reviewers, verified findings, and a GitHub epic with one severity-labeled sub-issue per vulnerability",
+      "author": {
+        "name": "NimblePros"
+      },
+      "homepage": "https://github.com/NimblePros/claude-plugins",
+      "repository": "https://github.com/NimblePros/claude-plugins",
+      "license": "MIT",
+      "keywords": ["security", "audit", "vulnerabilities", "github", "code-review"],
+      "category": "security"
     }
   ],
   "renames": {

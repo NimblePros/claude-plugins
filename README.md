@@ -20,6 +20,7 @@ claude plugin install dotnet-testing@nimblepros
 | [**architecture**](plugins/architecture/) | `claude plugin install architecture@nimblepros` | ADR writing and technical documentation |
 | [**workflow**](plugins/workflow/) | `claude plugin install workflow@nimblepros` | Issue → spec → implementation → review → PR, over the `gh` CLI |
 | [**presenting**](plugins/presenting/) | `claude plugin install presenting@nimblepros` | Technical presentations: planning, storytelling, humor, code/diagram visuals, live demos, CFP abstracts, and reveal.js decks |
+| [**security**](plugins/security/) | `claude plugin install security@nimblepros` | `/security:audit`: a time-boxed, whole-codebase security review filed as a GitHub epic with severity-labeled sub-issues |
 
 Each plugin's README documents its skills, agents, commands, and requirements.
 
@@ -134,6 +135,12 @@ recorded in
 │   ├── playwright-testing/
 │   ├── architecture/
 │   ├── presenting/
+│   ├── security/
+│   │   ├── .claude-plugin/plugin.json
+│   │   ├── README.md
+│   │   ├── commands/
+│   │   ├── agents/
+│   │   └── scripts/
 │   └── workflow/
 ├── devdocs/
 │   └── ADRs/                     # architecture decision records
